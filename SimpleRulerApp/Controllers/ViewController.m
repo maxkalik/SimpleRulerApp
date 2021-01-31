@@ -14,22 +14,27 @@
 
 @property (nonatomic, strong) NSMutableArray<SCNNode*> *markerNodes;
 @property (nonatomic, strong) NSMutableArray<SCNNode*> *lineNodes;
-@property (nonatomic, strong) SCNNode *textNode;
+// @property (nonatomic, strong) SCNNode *textNode;
 
 @end
 
-    
+typedef struct NodePositions {
+    float distance;
+    SCNVector3 midpoint;
+    SCNVector3 start;
+    SCNVector3 end;
+} NodePositions;
+
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.sceneView.delegate = self;
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
-    // self.sceneView.autoenablesDefaultLighting = YES;
     
     self.markerNodes = [[NSMutableArray alloc] init];
     self.lineNodes = [[NSMutableArray alloc] init];
-    self.textNode = [[SCNNode alloc] init];
+    // self.textNode = [[SCNNode alloc] init];
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
@@ -76,81 +81,34 @@
     
     [self.markerNodes addObject:markerNode];
     
-    if (self.markerNodes.count > 2) {
-        [self.markerNodes.firstObject removeFromParentNode];
-        [self.markerNodes removeObjectAtIndex:0];
-        [self calculateDistance];
-    } else if (self.markerNodes.count == 2) {
+    if (self.markerNodes.count % 2 == 0) {
+        NSLog(@"calculate distance");
         [self calculateDistance];
     }
+    
+    // if (self.markerNodes.count > 2) {
+    //     [self.markerNodes.firstObject removeFromParentNode];
+    //     [self.markerNodes removeObjectAtIndex:0];
+    //     [self calculateDistance];
+    // } else if (self.markerNodes.count == 2) {
+    //     [self calculateDistance];
+    // }
 }
 
-- (SCNNode*)drawTheLineFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint {
-    // draw the line
-    SCNVector3 vertices[] = { startPoint, endPoint };
-    int indices[] = {0, 1};
-    
-    SCNGeometrySource *vertexSource = [SCNGeometrySource geometrySourceWithVertices:vertices count:2];
-    
-    NSData *indexData = [NSData dataWithBytes:indices length:sizeof(indices)];
-    SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:indexData primitiveType:SCNGeometryPrimitiveTypeLine primitiveCount:1 bytesPerIndex:sizeof(int)];
-    SCNGeometry *line = [SCNGeometry geometryWithSources:[[NSArray alloc] initWithObjects:vertexSource, nil] elements:[[NSArray alloc] initWithObjects:element, nil]];
-    
-    // line color
-    line.firstMaterial.lightingModelName = SCNLightingModelConstant;
-    line.firstMaterial.diffuse.contents = UIColor.whiteColor;
-    
-    SCNNode *lineNode = [SCNNode nodeWithGeometry:line];
-    
-    return lineNode;
-}
-
-
-- (SCNNode*)drawThiCylinderLineFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint {
-    // SCNVector3 vector = SCNVector3Make(startPoint.x - endPoint.x, startPoint.y - endPoint.y, startPoint.z - endPoint.z);
-    
-    GLKVector3 startPosition = SCNVector3ToGLKVector3(startPoint);
-    GLKVector3 endPosition = SCNVector3ToGLKVector3(endPoint);
-    
-    float distance = GLKVector3Distance(startPosition, endPosition);
-    
-    // float distance = sqrtf(vector.x * vector.x + vector.y + vector.y + vector.z * vector.z);
-    SCNVector3 midPosition = SCNVector3Make((startPoint.x + endPoint.x) / 2, (startPoint.y + endPoint.y) / 2, (startPoint.z + endPoint.z) / 2);
-    
+- (SCNNode*)drawCylinderLineForDistance:(float)distance usingMidpoint:(SCNVector3)midpoint {
     SCNCylinder *cylinderLine = [SCNCylinder cylinderWithRadius:0.002 height:distance];
-    // cylinderLine.radialSegmentCount = 5;
+    cylinderLine.radialSegmentCount = 5;
     cylinderLine.firstMaterial.diffuse.contents = UIColor.whiteColor;
     
     SCNNode *lineNode = [SCNNode nodeWithGeometry:cylinderLine];
-    lineNode.position = midPosition;
-    [lineNode lookAt:endPoint up:self.sceneView.scene.rootNode.worldUp localFront:lineNode.worldUp];
+    lineNode.position = midpoint;
     return lineNode;
-    
 }
 
-
-- (void)calculateDistance {
-    SCNNode *start = [self.markerNodes objectAtIndex:0];
-    SCNNode *end = [self.markerNodes objectAtIndex:1];
-    
-    // draw the line
-    // SCNNode *lineNode = [self drawTheLineFrom:start.position to:end.position];
-    SCNNode *lineNode = [self drawThiCylinderLineFrom:start.position to:end.position];
-    
-    [self.sceneView.scene.rootNode addChildNode:lineNode];
-    [self.lineNodes addObject:lineNode];
-    
-    NSLog(@"%lu",self.lineNodes.count);
-    
-    if (self.lineNodes.count > 1) {
-        [self.lineNodes.firstObject removeFromParentNode];
-        [self.lineNodes removeObjectAtIndex:0];
-    }
-    
-    
+- (NodePositions)calculateDistanceFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint {
     // calculate distance
-    GLKVector3 startPosition = SCNVector3ToGLKVector3(start.position);
-    GLKVector3 endPosition = SCNVector3ToGLKVector3(end.position);
+    GLKVector3 startPosition = SCNVector3ToGLKVector3(startPoint);
+    GLKVector3 endPosition = SCNVector3ToGLKVector3(endPoint);
     
     float distance = GLKVector3Distance(startPosition, endPosition);
     
@@ -163,34 +121,67 @@
     GLKVector3 sum = GLKVector3Add(startPosition, endPosition);
     SCNVector3 midpoint = SCNVector3Make(sum.x / 2, sum.y / 2, sum.z / 2);
     
-    [self addText:[NSString stringWithFormat:@"%.2f", [self convertToInchesFromMeters:distance]] :midpoint];
+    NodePositions nodePositions = {
+        .distance = distance,
+        .midpoint = midpoint,
+        .start = startPoint,
+        .end = endPoint
+    };
+    
+    return nodePositions;
 }
 
-- (void)addText:(NSString*)str :(SCNVector3)location {
-    SCNText *text = [SCNText textWithString:str extrusionDepth:0.1];
+- (void)calculateDistance {
+    SCNNode *start = [self.markerNodes objectAtIndex:self.markerNodes.count - 2];
+    SCNNode *end = [self.markerNodes lastObject];
+    
+    NodePositions nodePositions = [self calculateDistanceFrom:start.position to:end.position];
+    
+    [self addTextFor:nodePositions];
+    [self addLineFor:nodePositions];
+}
+
+- (void)addLineFor:(NodePositions)nodePositions {
+    SCNNode *lineNode = [self drawCylinderLineForDistance:nodePositions.distance usingMidpoint:nodePositions.midpoint];
+    [lineNode lookAt:nodePositions.end up:self.sceneView.scene.rootNode.worldUp localFront:lineNode.worldUp];
+    
+    [self.sceneView.scene.rootNode addChildNode:lineNode];
+    [self.lineNodes addObject:lineNode];
+    
+    // if (self.lineNodes.count > 1) {
+        // [self.lineNodes.firstObject removeFromParentNode];
+        // [self.lineNodes removeObjectAtIndex:0];
+    // }
+}
+
+- (void)addTextFor:(NodePositions)nodePositions {
+    SCNNode *textNode = [[SCNNode alloc] init];
+    SCNText *text = [SCNText textWithString:[NSString stringWithFormat:@"%.2f", [self convertToInchesFromMeters:nodePositions.distance]] extrusionDepth:0.1];
     text.font = [UIFont fontWithName:@"futura" size:16];
     text.flatness = 0.0;
+    text.alignmentMode = kCAAlignmentCenter;
     CGFloat scaleFactor = 0.02 / text.font.pointSize;
     
     // make text always be turned toward to the camera
     SCNBillboardConstraint *constraint = [[SCNBillboardConstraint alloc] init];
-    // [self.textNode.constraints arrayByAddingObject:constraint];
-    self.textNode.constraints = [[NSArray alloc] initWithObjects:constraint, nil];
+    // constraint.freeAxes = SCNBillboardAxisY;
+    textNode.constraints = [[NSArray alloc] initWithObjects:constraint, nil];
     
-    self.textNode.geometry = text;
-    self.textNode.scale = SCNVector3Make(scaleFactor, scaleFactor, scaleFactor);
+    textNode.geometry = text;
+    textNode.scale = SCNVector3Make(scaleFactor, scaleFactor, scaleFactor);
     
     SCNVector3 max;
     SCNVector3 min;
     
-    [self.textNode getBoundingBoxMin:&max max:&min];
+    [textNode getBoundingBoxMin:&max max:&min];
     float offset = (max.x - min.x) / 2 * scaleFactor;
     
-    SCNVector3 textPosition = SCNVector3Make(location.x + offset, location.y, location.z);
+    SCNVector3 textPosition = SCNVector3Make(nodePositions.midpoint.x + offset, nodePositions.midpoint.y + 0.02, nodePositions.midpoint.z);
     
-    self.textNode.position = textPosition;
-    [self.sceneView.scene.rootNode addChildNode:self.textNode];
-    // NSLog(@"%@", self.sceneView.scene.rootNode.childNodes);
+    textNode.position = textPosition;
+    
+    [self.sceneView.scene.rootNode addChildNode:textNode];
+
 }
 
 - (double)convertToInchesFromMeters:(float)meters {
@@ -199,7 +190,6 @@
     
     if (self.segmentControl.selectedSegmentIndex == 0) {
         length = [measurement measurementByConvertingToUnit:NSUnitLength.centimeters];
-        
     } else {
         length = [measurement measurementByConvertingToUnit:NSUnitLength.inches];
     }

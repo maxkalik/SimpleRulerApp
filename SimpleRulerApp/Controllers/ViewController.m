@@ -25,7 +25,7 @@
     [super viewDidLoad];
     self.sceneView.delegate = self;
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
-    self.sceneView.autoenablesDefaultLighting = YES;
+    // self.sceneView.autoenablesDefaultLighting = YES;
     
     self.markerNodes = [[NSMutableArray alloc] init];
     self.lineNodes = [[NSMutableArray alloc] init];
@@ -63,13 +63,12 @@
 
 
 - (void)addMarkerAt:(ARHitTestResult*)hitResult {
-    SCNCone* cone = [SCNCone coneWithTopRadius:0.007 bottomRadius:0.001 height:0.03];
+    // SCNCone* cone = [SCNCone coneWithTopRadius:0.007 bottomRadius:0.001 height:0.03];
+    SCNCylinder *cylinder = [SCNCylinder cylinderWithRadius:0.007 height:0.0001];
     SCNMaterial* material = [[SCNMaterial alloc] init];
-    material.diffuse.contents = UIColor.blueColor;
-    cone.materials = [[NSArray alloc] initWithObjects:material, nil];
-    NSUUID* uuid = [NSUUID UUID];
-    cone.name = [uuid UUIDString];
-    SCNNode* markerNode = [SCNNode nodeWithGeometry:cone];
+    material.diffuse.contents = UIColor.whiteColor;
+    cylinder.materials = [[NSArray alloc] initWithObjects:material, nil];
+    SCNNode* markerNode = [SCNNode nodeWithGeometry:cylinder];
     
     simd_float4 location = hitResult.worldTransform.columns[3];
     markerNode.position = SCNVector3Make(location.x, location.y, location.z);
@@ -92,22 +91,54 @@
     int indices[] = {0, 1};
     
     SCNGeometrySource *vertexSource = [SCNGeometrySource geometrySourceWithVertices:vertices count:2];
+    
     NSData *indexData = [NSData dataWithBytes:indices length:sizeof(indices)];
     SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:indexData primitiveType:SCNGeometryPrimitiveTypeLine primitiveCount:1 bytesPerIndex:sizeof(int)];
-    SCNGeometry *line = [SCNGeometry geometryWithSources:@[vertexSource] elements:@[element]];
+    SCNGeometry *line = [SCNGeometry geometryWithSources:[[NSArray alloc] initWithObjects:vertexSource, nil] elements:[[NSArray alloc] initWithObjects:element, nil]];
+    
+    // line color
+    line.firstMaterial.lightingModelName = SCNLightingModelConstant;
+    line.firstMaterial.diffuse.contents = UIColor.whiteColor;
+    
     SCNNode *lineNode = [SCNNode nodeWithGeometry:line];
     
     return lineNode;
 }
+
+
+- (SCNNode*)drawThiCylinderLineFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint {
+    // SCNVector3 vector = SCNVector3Make(startPoint.x - endPoint.x, startPoint.y - endPoint.y, startPoint.z - endPoint.z);
+    
+    GLKVector3 startPosition = SCNVector3ToGLKVector3(startPoint);
+    GLKVector3 endPosition = SCNVector3ToGLKVector3(endPoint);
+    
+    float distance = GLKVector3Distance(startPosition, endPosition);
+    
+    // float distance = sqrtf(vector.x * vector.x + vector.y + vector.y + vector.z * vector.z);
+    SCNVector3 midPosition = SCNVector3Make((startPoint.x + endPoint.x) / 2, (startPoint.y + endPoint.y) / 2, (startPoint.z + endPoint.z) / 2);
+    
+    SCNCylinder *cylinderLine = [SCNCylinder cylinderWithRadius:0.002 height:distance];
+    // cylinderLine.radialSegmentCount = 5;
+    cylinderLine.firstMaterial.diffuse.contents = UIColor.whiteColor;
+    
+    SCNNode *lineNode = [SCNNode nodeWithGeometry:cylinderLine];
+    lineNode.position = midPosition;
+    [lineNode lookAt:endPoint up:self.sceneView.scene.rootNode.worldUp localFront:lineNode.worldUp];
+    return lineNode;
+    
+}
+
 
 - (void)calculateDistance {
     SCNNode *start = [self.markerNodes objectAtIndex:0];
     SCNNode *end = [self.markerNodes objectAtIndex:1];
     
     // draw the line
-    SCNNode *lineNode = [self drawTheLineFrom:start.position to:end.position];
-    [self.lineNodes addObject:lineNode];
+    // SCNNode *lineNode = [self drawTheLineFrom:start.position to:end.position];
+    SCNNode *lineNode = [self drawThiCylinderLineFrom:start.position to:end.position];
+    
     [self.sceneView.scene.rootNode addChildNode:lineNode];
+    [self.lineNodes addObject:lineNode];
     
     NSLog(@"%lu",self.lineNodes.count);
     
@@ -139,7 +170,7 @@
     SCNText *text = [SCNText textWithString:str extrusionDepth:0.1];
     text.font = [UIFont fontWithName:@"futura" size:16];
     text.flatness = 0.0;
-    CGFloat scaleFactor = 0.05 / text.font.pointSize;
+    CGFloat scaleFactor = 0.02 / text.font.pointSize;
     
     // make text always be turned toward to the camera
     SCNBillboardConstraint *constraint = [[SCNBillboardConstraint alloc] init];
@@ -178,6 +209,5 @@
 - (IBAction)segmentControlChanged:(id)sender {
     [self calculateDistance];
 }
-
 
 @end

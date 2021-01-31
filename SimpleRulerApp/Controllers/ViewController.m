@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
 
 @property (nonatomic, strong) NSMutableArray<SCNNode*> *markerNodes;
+@property (nonatomic, strong) NSMutableArray<SCNNode*> *lineNodes;
 @property (nonatomic, strong) SCNNode *textNode;
 
 @end
@@ -27,6 +28,7 @@
     self.sceneView.autoenablesDefaultLighting = YES;
     
     self.markerNodes = [[NSMutableArray alloc] init];
+    self.lineNodes = [[NSMutableArray alloc] init];
     self.textNode = [[SCNNode alloc] init];
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -84,10 +86,38 @@
     }
 }
 
+- (SCNNode*)drawTheLineFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint {
+    // draw the line
+    SCNVector3 vertices[] = { startPoint, endPoint };
+    int indices[] = {0, 1};
+    
+    SCNGeometrySource *vertexSource = [SCNGeometrySource geometrySourceWithVertices:vertices count:2];
+    NSData *indexData = [NSData dataWithBytes:indices length:sizeof(indices)];
+    SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:indexData primitiveType:SCNGeometryPrimitiveTypeLine primitiveCount:1 bytesPerIndex:sizeof(int)];
+    SCNGeometry *line = [SCNGeometry geometryWithSources:@[vertexSource] elements:@[element]];
+    SCNNode *lineNode = [SCNNode nodeWithGeometry:line];
+    
+    return lineNode;
+}
+
 - (void)calculateDistance {
     SCNNode *start = [self.markerNodes objectAtIndex:0];
     SCNNode *end = [self.markerNodes objectAtIndex:1];
     
+    // draw the line
+    SCNNode *lineNode = [self drawTheLineFrom:start.position to:end.position];
+    [self.lineNodes addObject:lineNode];
+    [self.sceneView.scene.rootNode addChildNode:lineNode];
+    
+    NSLog(@"%lu",self.lineNodes.count);
+    
+    if (self.lineNodes.count > 1) {
+        [self.lineNodes.firstObject removeFromParentNode];
+        [self.lineNodes removeObjectAtIndex:0];
+    }
+    
+    
+    // calculate distance
     GLKVector3 startPosition = SCNVector3ToGLKVector3(start.position);
     GLKVector3 endPosition = SCNVector3ToGLKVector3(end.position);
     
@@ -129,7 +159,7 @@
     
     self.textNode.position = textPosition;
     [self.sceneView.scene.rootNode addChildNode:self.textNode];
-    NSLog(@"%@", self.sceneView.scene.rootNode.childNodes);
+    // NSLog(@"%@", self.sceneView.scene.rootNode.childNodes);
 }
 
 - (double)convertToInchesFromMeters:(float)meters {
@@ -137,10 +167,10 @@
     NSMeasurement<NSUnitLength*>* length;
     
     if (self.segmentControl.selectedSegmentIndex == 0) {
-        length = [measurement measurementByConvertingToUnit:NSUnitLength.inches];
+        length = [measurement measurementByConvertingToUnit:NSUnitLength.centimeters];
         
     } else {
-        length = [measurement measurementByConvertingToUnit:NSUnitLength.centimeters];
+        length = [measurement measurementByConvertingToUnit:NSUnitLength.inches];
     }
     return length.doubleValue;
 }

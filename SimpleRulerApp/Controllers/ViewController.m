@@ -6,15 +6,13 @@
 //
 
 #import "ViewController.h"
+#import "MeasurementSCNNode.h"
 
 @interface ViewController () <ARSCNViewDelegate>
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
-
 @property (nonatomic, strong) NSMutableArray<SCNNode*> *markerNodes;
-@property (nonatomic, strong) NSMutableArray<SCNNode*> *lineNodes;
-// @property (nonatomic, strong) SCNNode *textNode;
 
 @end
 
@@ -31,9 +29,10 @@ typedef struct NodePositions {
     [super viewDidLoad];
     self.sceneView.delegate = self;
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
+    self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
     
     self.markerNodes = [[NSMutableArray alloc] init];
-    self.lineNodes = [[NSMutableArray alloc] init];
+    // self.textNodes = [[NSMutableArray alloc] init];
     // self.textNode = [[SCNNode alloc] init];
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -85,14 +84,6 @@ typedef struct NodePositions {
         NSLog(@"calculate distance");
         [self calculateDistance];
     }
-    
-    // if (self.markerNodes.count > 2) {
-    //     [self.markerNodes.firstObject removeFromParentNode];
-    //     [self.markerNodes removeObjectAtIndex:0];
-    //     [self calculateDistance];
-    // } else if (self.markerNodes.count == 2) {
-    //     [self calculateDistance];
-    // }
 }
 
 - (SCNNode*)drawCylinderLineForDistance:(float)distance usingMidpoint:(SCNVector3)midpoint {
@@ -146,58 +137,33 @@ typedef struct NodePositions {
     [lineNode lookAt:nodePositions.end up:self.sceneView.scene.rootNode.worldUp localFront:lineNode.worldUp];
     
     [self.sceneView.scene.rootNode addChildNode:lineNode];
-    [self.lineNodes addObject:lineNode];
-    
-    // if (self.lineNodes.count > 1) {
-        // [self.lineNodes.firstObject removeFromParentNode];
-        // [self.lineNodes removeObjectAtIndex:0];
-    // }
 }
 
 - (void)addTextFor:(NodePositions)nodePositions {
-    SCNNode *textNode = [[SCNNode alloc] init];
-    SCNText *text = [SCNText textWithString:[NSString stringWithFormat:@"%.2f", [self convertToInchesFromMeters:nodePositions.distance]] extrusionDepth:0.1];
-    text.font = [UIFont fontWithName:@"futura" size:16];
-    text.flatness = 0.0;
-    text.alignmentMode = kCAAlignmentCenter;
-    CGFloat scaleFactor = 0.02 / text.font.pointSize;
-    
-    // make text always be turned toward to the camera
-    SCNBillboardConstraint *constraint = [[SCNBillboardConstraint alloc] init];
-    // constraint.freeAxes = SCNBillboardAxisY;
-    textNode.constraints = [[NSArray alloc] initWithObjects:constraint, nil];
-    
-    textNode.geometry = text;
-    textNode.scale = SCNVector3Make(scaleFactor, scaleFactor, scaleFactor);
-    
-    SCNVector3 max;
-    SCNVector3 min;
-    
-    [textNode getBoundingBoxMin:&max max:&min];
-    float offset = (max.x - min.x) / 2 * scaleFactor;
-    
-    SCNVector3 textPosition = SCNVector3Make(nodePositions.midpoint.x + offset, nodePositions.midpoint.y + 0.02, nodePositions.midpoint.z);
-    
-    textNode.position = textPosition;
-    
+    MeasurementSCNNode *textNode = [[MeasurementSCNNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
     [self.sceneView.scene.rootNode addChildNode:textNode];
-
 }
 
-- (double)convertToInchesFromMeters:(float)meters {
-    NSMeasurement<NSUnitLength*>* measurement = [[NSMeasurement alloc] initWithDoubleValue:(double)meters unit:NSUnitLength.meters];
-    NSMeasurement<NSUnitLength*>* length;
-    
-    if (self.segmentControl.selectedSegmentIndex == 0) {
-        length = [measurement measurementByConvertingToUnit:NSUnitLength.centimeters];
-    } else {
-        length = [measurement measurementByConvertingToUnit:NSUnitLength.inches];
+- (void)convertMeasurementInTextNode:(MeasurementSCNNode*)textNode {
+    switch (self.segmentControl.selectedSegmentIndex) {
+        case 1: {
+            [textNode showInches];
+            break;
+        };
+        default: {
+            [textNode showMeters];
+            break;
+        };
     }
-    return length.doubleValue;
 }
 
 - (IBAction)segmentControlChanged:(id)sender {
-    [self calculateDistance];
+    for (SCNNode *node in self.sceneView.scene.rootNode.childNodes) {
+        if ([node isKindOfClass: [MeasurementSCNNode class]]) {
+            MeasurementSCNNode *textNode = (MeasurementSCNNode*)node;
+            [self convertMeasurementInTextNode:textNode];
+        }
+    }
 }
 
 @end

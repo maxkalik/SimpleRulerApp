@@ -14,6 +14,8 @@
 		116B2EFF25C379E9007D5B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFE25C379E9007D5B0A /* Assets.xcassets */; };
 		116B2F0225C379E9007D5B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2F0025C379E9007D5B0A /* LaunchScreen.storyboard */; };
 		116B2F0525C379E9007D5B0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2F0425C379E9007D5B0A /* main.m */; };
+		11FA213325C8AD07000BA053 /* MeasurementSCNNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213225C8AD07000BA053 /* MeasurementSCNNode.m */; };
+		11FA213A25C8B33B000BA053 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213925C8B33B000BA053 /* Helper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,10 @@
 		116B2F0125C379E9007D5B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		116B2F0325C379E9007D5B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		116B2F0425C379E9007D5B0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		11FA213125C8AD07000BA053 /* MeasurementSCNNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeasurementSCNNode.h; sourceTree = "<group>"; };
+		11FA213225C8AD07000BA053 /* MeasurementSCNNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasurementSCNNode.m; sourceTree = "<group>"; };
+		11FA213825C8B33B000BA053 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		11FA213925C8B33B000BA053 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,8 @@
 		116B2EF225C379E9007D5B0A /* SimpleRulerApp */ = {
 			isa = PBXGroup;
 			children = (
+				11FA213725C8B30F000BA053 /* Utils */,
+				11FA213025C8ACB4000BA053 /* Views */,
 				116B2F0D25C37A91007D5B0A /* Supporting Files */,
 				116B2F1025C37ABA007D5B0A /* Storyboards */,
 				116B2F0F25C37AAB007D5B0A /* Assets */,
@@ -104,6 +112,24 @@
 				116B2EF925C379E9007D5B0A /* ViewController.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		11FA213025C8ACB4000BA053 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				11FA213125C8AD07000BA053 /* MeasurementSCNNode.h */,
+				11FA213225C8AD07000BA053 /* MeasurementSCNNode.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		11FA213725C8B30F000BA053 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				11FA213825C8B33B000BA053 /* Helper.h */,
+				11FA213925C8B33B000BA053 /* Helper.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,7 +204,9 @@
 			files = (
 				116B2EFA25C379E9007D5B0A /* ViewController.m in Sources */,
 				116B2F0525C379E9007D5B0A /* main.m in Sources */,
+				11FA213325C8AD07000BA053 /* MeasurementSCNNode.m in Sources */,
 				116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */,
+				11FA213A25C8B33B000BA053 /* Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

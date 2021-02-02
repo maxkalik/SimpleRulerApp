@@ -11,9 +11,7 @@
 
 @property (nonatomic, assign) float distance;
 @property (nonatomic, assign) SCNVector3 midpoint;
-@property (nonatomic, assign) double centimeters;
-@property (nonatomic, assign) double inches;
-
+@property (nonatomic, strong) NSMeasurement<NSUnitLength*>* measurement;
 @property (nonatomic, strong) SCNText *text;
 
 @end
@@ -26,9 +24,7 @@
         self.distance = distance;
         self.midpoint = midpoint;
         
-        NSMeasurement<NSUnitLength*>* measurement = [[NSMeasurement alloc] initWithDoubleValue:(double)distance unit:NSUnitLength.meters];
-        self.centimeters = [measurement measurementByConvertingToUnit:NSUnitLength.centimeters].doubleValue;
-        self.inches = [measurement measurementByConvertingToUnit:NSUnitLength.inches].doubleValue;
+        self.measurement = [[NSMeasurement alloc] initWithDoubleValue:(double)distance unit:NSUnitLength.meters];
         
         [self common];
     }
@@ -36,7 +32,7 @@
 }
 
 - (void)common {
-    self.text = [SCNText textWithString:[NSString stringWithFormat:@"%.2f", self.centimeters] extrusionDepth:0.1];
+    self.text = [SCNText textWithString:[self getMeasurementFromLength:NSUnitLength.centimeters] extrusionDepth:0.1];
     self.text.font = [UIFont fontWithName:@"futura" size:16];
     self.text.flatness = 0.0;
     self.text.alignmentMode = kCAAlignmentCenter;
@@ -62,14 +58,16 @@
     self.position = textPosition;
 }
 
-- (void)showMeters {
-    NSLog(@"SHOW METERS %@", [NSString stringWithFormat:@"%.2f", self.centimeters]);
-    self.text.string = [NSString stringWithFormat:@"%.2f", self.centimeters];
+- (NSString*)getMeasurementFromLength:(NSUnitLength*)length {
+    return [NSString stringWithFormat:@"%.2f", [self.measurement measurementByConvertingToUnit:length].doubleValue];
+}
+
+- (void)showCentimeters {
+    self.text.string = [self getMeasurementFromLength:NSUnitLength.centimeters];
 }
 
 - (void)showInches {
-    NSLog(@"SHOW INCHES %@", [NSString stringWithFormat:@"%.2f", self.inches]);
-    self.text.string = [NSString stringWithFormat:@"%.2f", self.inches];
+    self.text.string = [self getMeasurementFromLength:NSUnitLength.inches];
 }
 
 @end

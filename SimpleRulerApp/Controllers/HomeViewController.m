@@ -5,10 +5,12 @@
 //  Created by Maksim Kalik on 1/29/21.
 //
 
-#import "ViewController.h"
+#import "HomeViewController.h"
 #import "MeasurementSCNNode.h"
+#import "CylinderLineSCNNode.h"
+#import "Helper.h"
 
-@interface ViewController () <ARSCNViewDelegate>
+@interface HomeViewController () <ARSCNViewDelegate>
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
@@ -16,14 +18,7 @@
 
 @end
 
-typedef struct NodePositions {
-    float distance;
-    SCNVector3 midpoint;
-    SCNVector3 start;
-    SCNVector3 end;
-} NodePositions;
-
-@implementation ViewController
+@implementation HomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,8 +27,6 @@ typedef struct NodePositions {
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
     
     self.markerNodes = [[NSMutableArray alloc] init];
-    // self.textNodes = [[NSMutableArray alloc] init];
-    // self.textNode = [[SCNNode alloc] init];
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
@@ -86,57 +79,20 @@ typedef struct NodePositions {
     }
 }
 
-- (SCNNode*)drawCylinderLineForDistance:(float)distance usingMidpoint:(SCNVector3)midpoint {
-    SCNCylinder *cylinderLine = [SCNCylinder cylinderWithRadius:0.002 height:distance];
-    cylinderLine.radialSegmentCount = 5;
-    cylinderLine.firstMaterial.diffuse.contents = UIColor.whiteColor;
-    
-    SCNNode *lineNode = [SCNNode nodeWithGeometry:cylinderLine];
-    lineNode.position = midpoint;
-    return lineNode;
-}
-
-- (NodePositions)calculateDistanceFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint {
-    // calculate distance
-    GLKVector3 startPosition = SCNVector3ToGLKVector3(startPoint);
-    GLKVector3 endPosition = SCNVector3ToGLKVector3(endPoint);
-    
-    float distance = GLKVector3Distance(startPosition, endPosition);
-    
-    // find midpoint between points for text node position
-    /*
-         x1 + x2    y1 + y2    z1 + z2
-     M( ---------, ---------, --------- )
-            2          2          2
-    */
-    GLKVector3 sum = GLKVector3Add(startPosition, endPosition);
-    SCNVector3 midpoint = SCNVector3Make(sum.x / 2, sum.y / 2, sum.z / 2);
-    
-    NodePositions nodePositions = {
-        .distance = distance,
-        .midpoint = midpoint,
-        .start = startPoint,
-        .end = endPoint
-    };
-    
-    return nodePositions;
-}
-
 - (void)calculateDistance {
     SCNNode *start = [self.markerNodes objectAtIndex:self.markerNodes.count - 2];
     SCNNode *end = [self.markerNodes lastObject];
-    
-    NodePositions nodePositions = [self calculateDistanceFrom:start.position to:end.position];
+
+    NodePositions nodePositions = [Helper.sharedInstance calculateDistanceFrom:start.position to:end.position];
     
     [self addTextFor:nodePositions];
     [self addLineFor:nodePositions];
 }
 
 - (void)addLineFor:(NodePositions)nodePositions {
-    SCNNode *lineNode = [self drawCylinderLineForDistance:nodePositions.distance usingMidpoint:nodePositions.midpoint];
-    [lineNode lookAt:nodePositions.end up:self.sceneView.scene.rootNode.worldUp localFront:lineNode.worldUp];
-    
-    [self.sceneView.scene.rootNode addChildNode:lineNode];
+    CylinderLineSCNNode *cylinderLineNode = [[CylinderLineSCNNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
+    [cylinderLineNode lookAt:nodePositions.end up:self.sceneView.scene.rootNode.worldUp localFront:cylinderLineNode.worldUp];
+    [self.sceneView.scene.rootNode addChildNode:cylinderLineNode];
 }
 
 - (void)addTextFor:(NodePositions)nodePositions {
@@ -151,7 +107,7 @@ typedef struct NodePositions {
             break;
         };
         default: {
-            [textNode showMeters];
+            [textNode showCentimeters];
             break;
         };
     }

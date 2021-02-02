@@ -6,13 +6,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <SceneKit/SceneKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef struct NodePositions {
+    float distance;
+    SCNVector3 midpoint;
+    SCNVector3 start;
+    SCNVector3 end;
+} NodePositions;
 
 @interface Helper : NSObject
 
 - (instancetype)init UNAVAILABLE_ATTRIBUTE;
 + (instancetype)sharedInstance;
+
+- (NodePositions)calculateDistanceFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint;
 
 @end
 

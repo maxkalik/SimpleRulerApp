@@ -5,9 +5,9 @@
 //  Created by Maksim Kalik on 2/1/21.
 //
 
-#import "MeasurementSCNNode.h"
+#import "MeasurementNode.h"
 
-@interface MeasurementSCNNode ()
+@interface MeasurementNode ()
 
 @property (nonatomic, assign) float distance;
 @property (nonatomic, assign) SCNVector3 midpoint;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation MeasurementSCNNode
+@implementation MeasurementNode
 
 - (id)initWithDistance:(float)distance and:(SCNVector3)midpoint {
     self = [super init];

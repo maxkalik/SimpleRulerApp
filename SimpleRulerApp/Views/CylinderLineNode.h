@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CylinderLineSCNNode : SCNNode
+@interface CylinderLineNode : SCNNode
 
 - (id)initWithDistance:(float)distance and:(SCNVector3)midpoint;
 

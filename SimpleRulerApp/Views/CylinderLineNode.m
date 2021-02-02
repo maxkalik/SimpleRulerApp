@@ -5,16 +5,16 @@
 //  Created by Maksim Kalik on 2/2/21.
 //
 
-#import "CylinderLineSCNNode.h"
+#import "CylinderLineNode.h"
 
-@interface CylinderLineSCNNode ()
+@interface CylinderLineNode ()
 
 @property (nonatomic, assign) float distance;
 @property (nonatomic, assign) SCNVector3 midpoint;
 
 @end
 
-@implementation CylinderLineSCNNode
+@implementation CylinderLineNode
 
 - (id)initWithDistance:(float)distance and:(SCNVector3)midpoint {
     self = [super init];

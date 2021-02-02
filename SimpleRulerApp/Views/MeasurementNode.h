@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MeasurementSCNNode : SCNNode
+@interface MeasurementNode : SCNNode
 
 - (id)initWithDistance:(float)distance and:(SCNVector3)midpoint;
 - (void)showCentimeters;

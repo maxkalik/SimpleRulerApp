@@ -14,9 +14,10 @@
 		116B2EFF25C379E9007D5B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFE25C379E9007D5B0A /* Assets.xcassets */; };
 		116B2F0225C379E9007D5B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2F0025C379E9007D5B0A /* LaunchScreen.storyboard */; };
 		116B2F0525C379E9007D5B0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2F0425C379E9007D5B0A /* main.m */; };
-		11FA213325C8AD07000BA053 /* MeasurementSCNNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213225C8AD07000BA053 /* MeasurementSCNNode.m */; };
+		11FA213325C8AD07000BA053 /* MeasurementNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213225C8AD07000BA053 /* MeasurementNode.m */; };
 		11FA213A25C8B33B000BA053 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213925C8B33B000BA053 /* Helper.m */; };
-		11FA213F25C96D78000BA053 /* CylinderLineSCNNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213E25C96D78000BA053 /* CylinderLineSCNNode.m */; };
+		11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213E25C96D78000BA053 /* CylinderLineNode.m */; };
+		11FA214825C9729E000BA053 /* MarkerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA214725C9729E000BA053 /* MarkerNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,12 +32,14 @@
 		116B2F0125C379E9007D5B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		116B2F0325C379E9007D5B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		116B2F0425C379E9007D5B0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		11FA213125C8AD07000BA053 /* MeasurementSCNNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeasurementSCNNode.h; sourceTree = "<group>"; };
-		11FA213225C8AD07000BA053 /* MeasurementSCNNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasurementSCNNode.m; sourceTree = "<group>"; };
+		11FA213125C8AD07000BA053 /* MeasurementNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeasurementNode.h; sourceTree = "<group>"; };
+		11FA213225C8AD07000BA053 /* MeasurementNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasurementNode.m; sourceTree = "<group>"; };
 		11FA213825C8B33B000BA053 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		11FA213925C8B33B000BA053 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
-		11FA213D25C96D78000BA053 /* CylinderLineSCNNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CylinderLineSCNNode.h; sourceTree = "<group>"; };
-		11FA213E25C96D78000BA053 /* CylinderLineSCNNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CylinderLineSCNNode.m; sourceTree = "<group>"; };
+		11FA213D25C96D78000BA053 /* CylinderLineNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CylinderLineNode.h; sourceTree = "<group>"; };
+		11FA213E25C96D78000BA053 /* CylinderLineNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CylinderLineNode.m; sourceTree = "<group>"; };
+		11FA214625C9729E000BA053 /* MarkerNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkerNode.h; sourceTree = "<group>"; };
+		11FA214725C9729E000BA053 /* MarkerNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarkerNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,10 +123,12 @@
 		11FA213025C8ACB4000BA053 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				11FA213125C8AD07000BA053 /* MeasurementSCNNode.h */,
-				11FA213225C8AD07000BA053 /* MeasurementSCNNode.m */,
-				11FA213D25C96D78000BA053 /* CylinderLineSCNNode.h */,
-				11FA213E25C96D78000BA053 /* CylinderLineSCNNode.m */,
+				11FA213125C8AD07000BA053 /* MeasurementNode.h */,
+				11FA213225C8AD07000BA053 /* MeasurementNode.m */,
+				11FA213D25C96D78000BA053 /* CylinderLineNode.h */,
+				11FA213E25C96D78000BA053 /* CylinderLineNode.m */,
+				11FA214625C9729E000BA053 /* MarkerNode.h */,
+				11FA214725C9729E000BA053 /* MarkerNode.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,10 +214,11 @@
 			files = (
 				116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */,
 				116B2F0525C379E9007D5B0A /* main.m in Sources */,
-				11FA213325C8AD07000BA053 /* MeasurementSCNNode.m in Sources */,
+				11FA213325C8AD07000BA053 /* MeasurementNode.m in Sources */,
 				116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */,
+				11FA214825C9729E000BA053 /* MarkerNode.m in Sources */,
 				11FA213A25C8B33B000BA053 /* Helper.m in Sources */,
-				11FA213F25C96D78000BA053 /* CylinderLineSCNNode.m in Sources */,
+				11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

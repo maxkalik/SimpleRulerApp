@@ -6,7 +6,6 @@
 //
 
 #import "Helper.h"
-#import <GLKit/GLKVector3.h>
 
 @implementation Helper
 
@@ -24,6 +23,18 @@
     });
     
     return uniqueInstance;
+}
+
+- ( ARHitTestResult* _Nullable )getHitResultFromTapGesture:(UITapGestureRecognizer*)sender inSceneView:(ARSCNView *)sceneView {
+    switch (sender.state) {
+        case UIGestureRecognizerStateEnded: {
+            CGPoint location = [sender locationOfTouch:0 inView:sceneView];
+            NSArray<ARHitTestResult*>* hitTestResut = [sceneView hitTest:location types:ARHitTestResultTypeFeaturePoint];
+            return hitTestResut.firstObject;
+        };
+        default:
+            return nil;
+    }
 }
 
 - (NodePositions)calculateDistanceFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint {

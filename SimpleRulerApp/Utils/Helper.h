@@ -7,6 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SceneKit.h>
+// #import <GLKit/GLKVector3.h>
+#import <ARKit/ARKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,6 +25,7 @@ typedef struct NodePositions {
 + (instancetype)sharedInstance;
 
 - (NodePositions)calculateDistanceFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint;
+- ( ARHitTestResult* _Nullable )getHitResultFromTapGesture:(UITapGestureRecognizer*)sender inSceneView:(ARSCNView *)sceneView;
 
 @end
 

@@ -67,17 +67,17 @@
 
     NodePositions nodePositions = [Helper.sharedInstance calculateDistanceFrom:start.position to:end.position];
     
-    [self addTextFor:nodePositions];
-    [self addLineFor:nodePositions];
+    [self addTextForNodePositions:nodePositions];
+    [self addLineForNodePositions:nodePositions];
 }
 
-- (void)addLineFor:(NodePositions)nodePositions {
+- (void)addLineForNodePositions:(NodePositions)nodePositions {
     CylinderLineNode *cylinderLineNode = [[CylinderLineNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
     [cylinderLineNode lookAt:nodePositions.end up:self.sceneView.scene.rootNode.worldUp localFront:cylinderLineNode.worldUp];
     [self.sceneView.scene.rootNode addChildNode:cylinderLineNode];
 }
 
-- (void)addTextFor:(NodePositions)nodePositions {
+- (void)addTextForNodePositions:(NodePositions)nodePositions {
     MeasurementNode *textNode = [[MeasurementNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
     [self.sceneView.scene.rootNode addChildNode:textNode];
 }

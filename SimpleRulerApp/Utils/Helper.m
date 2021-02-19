@@ -63,4 +63,17 @@
     return nodePositions;
 }
 
+- (void)convertMeasurementInTextNode:(MeasurementNode*)textNode toSelectedMeasurementIndex:(NSInteger)index {
+    switch (index) {
+        case 1: {
+            [textNode showInches];
+            break;
+        };
+        default: {
+            [textNode showCentimeters];
+            break;
+        };
+    }
+}
+
 @end

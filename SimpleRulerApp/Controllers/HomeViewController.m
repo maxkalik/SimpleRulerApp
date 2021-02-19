@@ -82,24 +82,11 @@
     [self.sceneView.scene.rootNode addChildNode:textNode];
 }
 
-- (void)convertMeasurementInTextNode:(MeasurementNode*)textNode {
-    switch (self.segmentControl.selectedSegmentIndex) {
-        case 1: {
-            [textNode showInches];
-            break;
-        };
-        default: {
-            [textNode showCentimeters];
-            break;
-        };
-    }
-}
-
 - (IBAction)segmentControlChanged:(id)sender {
     for (SCNNode *node in self.sceneView.scene.rootNode.childNodes) {
         if ([node isKindOfClass: [MeasurementNode class]]) {
             MeasurementNode *textNode = (MeasurementNode*)node;
-            [self convertMeasurementInTextNode:textNode];
+            [Helper.sharedInstance convertMeasurementInTextNode:textNode toSelectedMeasurementIndex:self.segmentControl.selectedSegmentIndex];
         }
     }
 }

@@ -14,7 +14,8 @@
 @interface HomeViewController () <ARSCNViewDelegate>
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
-@property (nonatomic, strong) NSMutableArray<MarkerNode*> *markerNodes;
+@property(nonatomic, strong) NSMutableArray<SCNNode*> *measureNodes;
+@property(nonatomic, assign) NSInteger markerCount;
 
 @end
 
@@ -25,10 +26,12 @@
     self.sceneView.delegate = self;
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
-    self.markerNodes = [[NSMutableArray alloc] init];
-    
+    self.measureNodes = [[NSMutableArray alloc] init];
+
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
+    
+    self.markerCount = 0;
 }
 
 - (void)handleTap:(UITapGestureRecognizer*)sender {
@@ -49,21 +52,33 @@
 
 #pragma mark - METHODS
 
+- (void)initiateMeasureNodeWithMarkerNode:(MarkerNode*)markerNode {
+    SCNNode *measureNode = [[SCNNode alloc] init];
+    [measureNode addChildNode:markerNode];
+    [self.measureNodes addObject:measureNode];
+    [self.sceneView.scene.rootNode addChildNode:measureNode];
+}
+
 - (void)addMarkerAt:(ARHitTestResult*)hitResult {
     MarkerNode *markerNode = [[MarkerNode alloc] initWithHitResult:hitResult];
     
-    [self.sceneView.scene.rootNode addChildNode:markerNode];
-    [self.markerNodes addObject:markerNode];
+    self.markerCount += 1;
     
-    if (self.markerNodes.count % 2 == 0) {
+    if (self.markerCount > 1) {
+        SCNNode *measureNode = [self.measureNodes lastObject];
+        [measureNode addChildNode:markerNode];
         [self calculateDistance];
+        self.markerCount = 0;
+    } else {
+        [self initiateMeasureNodeWithMarkerNode:markerNode];
     }
 }
 
 - (void)calculateDistance {
-    SCNNode *start = [self.markerNodes objectAtIndex:self.markerNodes.count - 2];
-    SCNNode *end = [self.markerNodes lastObject];
-
+    SCNNode *measureNode = [self.measureNodes lastObject];
+    SCNNode *start = [measureNode.childNodes firstObject];
+    SCNNode *end = [measureNode.childNodes lastObject];
+    
     NodePositions nodePositions = [Helper.sharedInstance calculateDistanceFrom:start.position to:end.position];
     
     [self addTextForNodePositions:nodePositions];
@@ -73,13 +88,15 @@
 - (void)addLineForNodePositions:(NodePositions)nodePositions {
     CylinderLineNode *cylinderLineNode = [[CylinderLineNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
     [cylinderLineNode lookAt:nodePositions.end up:self.sceneView.scene.rootNode.worldUp localFront:cylinderLineNode.worldUp];
-    [self.sceneView.scene.rootNode addChildNode:cylinderLineNode];
+    [[self.measureNodes lastObject] addChildNode:cylinderLineNode];
 }
 
 - (void)addTextForNodePositions:(NodePositions)nodePositions {
     MeasurementNode *textNode = [[MeasurementNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
-    [self.sceneView.scene.rootNode addChildNode:textNode];
+    [[self.measureNodes lastObject] addChildNode:textNode];
 }
+
+#pragma mark - IBActions
 
 - (IBAction)segmentControlChanged:(UISegmentedControl *)sender {
     [Helper.sharedInstance convertMeasurementInTextNode:self.sceneView.scene.rootNode.childNodes
@@ -87,6 +104,11 @@
 }
 
 - (IBAction)undoButtonTapped:(UIButton *)sender {
+    if (self.measureNodes.count > 0) {
+        SCNNode *node = [self.measureNodes lastObject];
+        [node removeFromParentNode];
+        [self.measureNodes removeLastObject];
+    }
 }
 
 

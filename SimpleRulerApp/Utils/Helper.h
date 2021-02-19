@@ -28,7 +28,6 @@ typedef struct NodePositions {
 - ( ARHitTestResult* _Nullable )getHitResultFromTapGesture:(UITapGestureRecognizer*)sender inSceneView:(ARSCNView *)sceneView;
 - (void)convertMeasurementInTextNode:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index;
 
-
 @end
 
 NS_ASSUME_NONNULL_END

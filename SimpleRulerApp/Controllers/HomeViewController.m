@@ -14,7 +14,6 @@
 @interface HomeViewController () <ARSCNViewDelegate>
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
 @property (nonatomic, strong) NSMutableArray<MarkerNode*> *markerNodes;
 
 @end
@@ -82,13 +81,13 @@
     [self.sceneView.scene.rootNode addChildNode:textNode];
 }
 
-- (IBAction)segmentControlChanged:(id)sender {
-    for (SCNNode *node in self.sceneView.scene.rootNode.childNodes) {
-        if ([node isKindOfClass: [MeasurementNode class]]) {
-            MeasurementNode *textNode = (MeasurementNode*)node;
-            [Helper.sharedInstance convertMeasurementInTextNode:textNode toSelectedMeasurementIndex:self.segmentControl.selectedSegmentIndex];
-        }
-    }
+- (IBAction)segmentControlChanged:(UISegmentedControl *)sender {
+    [Helper.sharedInstance convertMeasurementInTextNode:self.sceneView.scene.rootNode.childNodes
+                             toSelectedMeasurementIndex:sender.selectedSegmentIndex];
 }
+
+- (IBAction)undoButtonTapped:(UIButton *)sender {
+}
+
 
 @end

@@ -70,28 +70,24 @@
 
 #pragma mark - Convert Measurement Into Text Node
 
-- (void)convertUnitsInTextNodes:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index {
-    for (SCNNode *node in textNodes) {
-        if ([node isKindOfClass:[MeasureNode class]]) {
-            MeasureNode *measureNode = (MeasureNode*)node;
-            NSLog(@"%@", measureNode);
-            
-            for (SCNNode *measureChildNode in measureNode.childNodes) {
-                if ([measureChildNode isKindOfClass: [UnitNode class]]) {
-                    UnitNode *textNode = (UnitNode*)measureChildNode;
-                    switch (index) {
-                        case 1: {
-                            [textNode showInches];
-                            break;
-                        };
-                        default: {
-                            [textNode showCentimeters];
-                            break;
-                        };
-                    }
-                }
-            }
-        }
+- (void)convertUnitsInMeasureNodes:(NSArray<MeasureNode *>*)measureNodes toSelectedMeasurementIndex:(NSInteger)index {
+    for (MeasureNode *measureNode in measureNodes) {
+        [self convertUnitsInMeasureNode:measureNode toSelectedMeasurementIndex:index];
+    }
+}
+
+- (void)convertUnitsInMeasureNode:(MeasureNode*)measureNode toSelectedMeasurementIndex:(NSInteger)index {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self isKindOfClass: %@", [UnitNode class]];
+    UnitNode *unitNode = (UnitNode *)[measureNode.childNodes filteredArrayUsingPredicate:predicate].firstObject;
+    switch (index) {
+        case 1: {
+            [unitNode showInches];
+            break;
+        };
+        default: {
+            [unitNode showCentimeters];
+            break;
+        };
     }
 }
 

@@ -27,7 +27,7 @@ typedef struct NodePositions {
 
 - (NodePositions)calculateDistanceFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint;
 - ( ARHitTestResult* _Nullable )getHitResultFromTapGesture:(UITapGestureRecognizer*)sender inSceneView:(ARSCNView *)sceneView;
-- (void)convertUnitsInTextNodes:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index;
+- (void)convertUnitsInMeasureNodes:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index;
 
 @end
 

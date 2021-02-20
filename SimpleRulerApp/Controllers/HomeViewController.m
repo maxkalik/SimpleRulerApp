@@ -104,7 +104,7 @@
 #pragma mark - IBActions
 
 - (IBAction)segmentControlChanged:(UISegmentedControl *)sender {
-    [Helper.sharedInstance convertUnitsInTextNodes:self.sceneView.scene.rootNode.childNodes
+    [Helper.sharedInstance convertUnitsInMeasureNodes:self.sceneView.scene.rootNode.childNodes
                              toSelectedMeasurementIndex:sender.selectedSegmentIndex];
 }
 

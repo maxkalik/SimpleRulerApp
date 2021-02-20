@@ -30,22 +30,22 @@
                                     <action selector="segmentControlChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="dQf-Rn-l5b"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYz-NX-gbI">
-                                <rect key="frame" x="40" y="780" width="42" height="42"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fYz-NX-gbI" customClass="CircleButton">
+                                <rect key="frame" x="40" y="772" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="EWw-Nu-Pid"/>
-                                    <constraint firstAttribute="width" constant="42" id="iVK-qB-0Dl"/>
+                                    <constraint firstAttribute="height" constant="50" id="EWw-Nu-Pid"/>
+                                    <constraint firstAttribute="width" constant="50" id="iVK-qB-0Dl"/>
                                 </constraints>
                                 <state key="normal" image="back"/>
                                 <connections>
                                     <action selector="undoButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="6St-UZ-VdP"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-ph-eP4">
-                                <rect key="frame" x="332" y="780" width="42" height="42"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-ph-eP4" customClass="CircleButton">
+                                <rect key="frame" x="324" y="772" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="42" id="74l-I8-3NT"/>
-                                    <constraint firstAttribute="height" constant="42" id="Ycf-cZ-Sln"/>
+                                    <constraint firstAttribute="width" constant="50" id="74l-I8-3NT"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ycf-cZ-Sln"/>
                                 </constraints>
                                 <state key="normal" image="list"/>
                             </button>

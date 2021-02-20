@@ -25,7 +25,9 @@
     return uniqueInstance;
 }
 
-- ( ARHitTestResult* _Nullable )getHitResultFromTapGesture:(UITapGestureRecognizer*)sender inSceneView:(ARSCNView *)sceneView {
+#pragma mark - Get Hit Result From Tap Gesture
+
+- (ARHitTestResult* _Nullable)getHitResultFromTapGesture:(UITapGestureRecognizer*)sender inSceneView:(ARSCNView *)sceneView {
     switch (sender.state) {
         case UIGestureRecognizerStateEnded: {
             CGPoint location = [sender locationOfTouch:0 inView:sceneView];
@@ -36,6 +38,8 @@
             return nil;
     }
 }
+
+#pragma mark - Calculate Distance
 
 - (NodePositions)calculateDistanceFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint {
     // calculate distance
@@ -50,6 +54,7 @@
      M( ---------, ---------, --------- )
             2          2          2
     */
+    
     GLKVector3 sum = GLKVector3Add(startPosition, endPosition);
     SCNVector3 midpoint = SCNVector3Make(sum.x / 2, sum.y / 2, sum.z / 2);
     
@@ -61,6 +66,26 @@
     };
     
     return nodePositions;
+}
+
+#pragma mark - Convert Measurement Into Text Node
+
+- (void)convertMeasurementInTextNode:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index {
+    for (SCNNode *node in textNodes) {
+        if ([node isKindOfClass: [MeasurementNode class]]) {
+            MeasurementNode *textNode = (MeasurementNode*)node;
+            switch (index) {
+                case 1: {
+                    [textNode showInches];
+                    break;
+                };
+                default: {
+                    [textNode showCentimeters];
+                    break;
+                };
+            }
+        }
+    }
 }
 
 @end

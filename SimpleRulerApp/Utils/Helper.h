@@ -7,8 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <SceneKit/SceneKit.h>
-// #import <GLKit/GLKVector3.h>
 #import <ARKit/ARKit.h>
+#import "MeasurementNode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,6 +26,7 @@ typedef struct NodePositions {
 
 - (NodePositions)calculateDistanceFrom:(SCNVector3)startPoint to:(SCNVector3)endPoint;
 - ( ARHitTestResult* _Nullable )getHitResultFromTapGesture:(UITapGestureRecognizer*)sender inSceneView:(ARSCNView *)sceneView;
+- (void)convertMeasurementInTextNode:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index;
 
 @end
 

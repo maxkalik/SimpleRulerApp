@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1127460725E089C00084D479 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127460625E089C00084D479 /* CircleButton.m */; };
 		116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF425C379E9007D5B0A /* AppDelegate.m */; };
 		116B2EF725C379E9007D5B0A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EF625C379E9007D5B0A /* art.scnassets */; };
 		116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF925C379E9007D5B0A /* HomeViewController.m */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1127460525E089C00084D479 /* CircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleButton.h; sourceTree = "<group>"; };
+		1127460625E089C00084D479 /* CircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleButton.m; sourceTree = "<group>"; };
 		116B2EF025C379E9007D5B0A /* SimpleRulerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRulerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		116B2EF325C379E9007D5B0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		116B2EF425C379E9007D5B0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				11FA213E25C96D78000BA053 /* CylinderLineNode.m */,
 				11FA214625C9729E000BA053 /* MarkerNode.h */,
 				11FA214725C9729E000BA053 /* MarkerNode.m */,
+				1127460525E089C00084D479 /* CircleButton.h */,
+				1127460625E089C00084D479 /* CircleButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 				11FA214825C9729E000BA053 /* MarkerNode.m in Sources */,
 				11FA213A25C8B33B000BA053 /* Helper.m in Sources */,
 				11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */,
+				1127460725E089C00084D479 /* CircleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

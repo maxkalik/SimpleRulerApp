@@ -25,22 +25,11 @@
     blur.userInteractionEnabled = NO;
     self.layer.cornerRadius = 20.0;
     self.layer.masksToBounds = YES;
+    self.showsTouchWhenHighlighted = YES;
     
     if (self.imageView != nil) {
         [self bringSubviewToFront:self.imageView];
     }
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [UIView animateWithDuration:0.1 animations:^{
-        self.alpha = 0.3;
-    }];
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [UIView animateWithDuration:0.2 animations:^{
-        self.alpha = 1;
-    }];
 }
 
 @end

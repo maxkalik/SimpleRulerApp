@@ -38,7 +38,7 @@
                                 </constraints>
                                 <state key="normal" image="back"/>
                                 <connections>
-                                    <action selector="undoButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="6St-UZ-VdP"/>
+                                    <action selector="undoButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Vjn-2z-KT3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kvu-ph-eP4" customClass="CircleButton">

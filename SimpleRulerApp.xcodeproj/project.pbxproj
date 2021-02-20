@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1127460725E089C00084D479 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127460625E089C00084D479 /* CircleButton.m */; };
 		116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF425C379E9007D5B0A /* AppDelegate.m */; };
-		116B2EF725C379E9007D5B0A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EF625C379E9007D5B0A /* art.scnassets */; };
 		116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF925C379E9007D5B0A /* HomeViewController.m */; };
 		116B2EFD25C379E9007D5B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFB25C379E9007D5B0A /* Main.storyboard */; };
 		116B2EFF25C379E9007D5B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFE25C379E9007D5B0A /* Assets.xcassets */; };
@@ -27,7 +26,6 @@
 		116B2EF025C379E9007D5B0A /* SimpleRulerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRulerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		116B2EF325C379E9007D5B0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		116B2EF425C379E9007D5B0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		116B2EF625C379E9007D5B0A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		116B2EF825C379E9007D5B0A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		116B2EF925C379E9007D5B0A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		116B2EFC25C379E9007D5B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 		116B2F0F25C37AAB007D5B0A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				116B2EF625C379E9007D5B0A /* art.scnassets */,
 				116B2EFE25C379E9007D5B0A /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -203,7 +200,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				116B2EF725C379E9007D5B0A /* art.scnassets in Resources */,
 				116B2F0225C379E9007D5B0A /* LaunchScreen.storyboard in Resources */,
 				116B2EFF25C379E9007D5B0A /* Assets.xcassets in Resources */,
 				116B2EFD25C379E9007D5B0A /* Main.storyboard in Resources */,

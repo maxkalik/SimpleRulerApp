@@ -10,6 +10,7 @@
 		1127460725E089C00084D479 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127460625E089C00084D479 /* CircleButton.m */; };
 		1127460E25E0A17C0084D479 /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127460D25E0A17C0084D479 /* ResultsTableViewController.m */; };
 		1127461225E138470084D479 /* MeasureNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127461125E138470084D479 /* MeasureNode.m */; };
+		1127461825E1477C0084D479 /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127461725E1477C0084D479 /* Result.m */; };
 		116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF425C379E9007D5B0A /* AppDelegate.m */; };
 		116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF925C379E9007D5B0A /* HomeViewController.m */; };
 		116B2EFD25C379E9007D5B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFB25C379E9007D5B0A /* Main.storyboard */; };
@@ -29,6 +30,8 @@
 		1127460D25E0A17C0084D479 /* ResultsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
 		1127461025E138470084D479 /* MeasureNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeasureNode.h; sourceTree = "<group>"; };
 		1127461125E138470084D479 /* MeasureNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasureNode.m; sourceTree = "<group>"; };
+		1127461625E1477C0084D479 /* Result.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Result.h; sourceTree = "<group>"; };
+		1127461725E1477C0084D479 /* Result.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Result.m; sourceTree = "<group>"; };
 		116B2EF025C379E9007D5B0A /* SimpleRulerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRulerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		116B2EF325C379E9007D5B0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		116B2EF425C379E9007D5B0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -60,6 +63,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1127461525E1474C0084D479 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1127461625E1477C0084D479 /* Result.h */,
+				1127461725E1477C0084D479 /* Result.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		116B2EE725C379E9007D5B0A = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +91,7 @@
 		116B2EF225C379E9007D5B0A /* SimpleRulerApp */ = {
 			isa = PBXGroup;
 			children = (
+				1127461525E1474C0084D479 /* Model */,
 				11FA213725C8B30F000BA053 /* Utils */,
 				11FA213025C8ACB4000BA053 /* Views */,
 				116B2F0D25C37A91007D5B0A /* Supporting Files */,
@@ -229,6 +242,7 @@
 				11FA213325C8AD07000BA053 /* UnitNode.m in Sources */,
 				1127461225E138470084D479 /* MeasureNode.m in Sources */,
 				116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */,
+				1127461825E1477C0084D479 /* Result.m in Sources */,
 				11FA214825C9729E000BA053 /* MarkerNode.m in Sources */,
 				11FA213A25C8B33B000BA053 /* Helper.m in Sources */,
 				11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */,

@@ -6,12 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Result.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ResultsTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray* results;
+@property (nonatomic, strong) NSMutableArray<Result*>* results;
 
 @end
 

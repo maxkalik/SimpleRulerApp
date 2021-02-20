@@ -14,6 +14,7 @@
 #import "MarkerNode.h"
 #import "ResultsTableViewController.h"
 #import "Helper.h"
+#import "Result.h"
 #import "MeasureNode.h"
 
 @interface HomeViewController : UIViewController

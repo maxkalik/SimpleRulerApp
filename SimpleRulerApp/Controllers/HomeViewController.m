@@ -11,7 +11,7 @@
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
 @property(nonatomic, strong) NSMutableArray<MeasureNode*> *measureNodes;
-@property (nonatomic, strong) NSMutableArray *results;
+@property (nonatomic, strong) NSMutableArray<Result*> *results;
 @property(nonatomic, assign) NSInteger markerCount;
 
 
@@ -25,7 +25,8 @@
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
     self.measureNodes = [[NSMutableArray alloc] init];
-
+    self.results = [[NSMutableArray alloc] init];
+    
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
     
@@ -78,7 +79,9 @@
     
     NodePositions nodePositions = [Helper.sharedInstance calculateDistanceFrom:start.position to:end.position];
     
-    // [self.results addObject:<#(nonnull id)#>];
+    Result *result = [[Result alloc] initWithDistance:nodePositions.distance];
+    [self.results addObject:result];
+    
     [self addTextForNodePositions:nodePositions];
     [self addLineForNodePositions:nodePositions];
 }

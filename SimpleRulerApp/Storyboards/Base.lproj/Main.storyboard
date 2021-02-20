@@ -49,7 +49,7 @@
                                 </constraints>
                                 <state key="normal" image="list"/>
                                 <connections>
-                                    <segue destination="BoX-1X-6RJ" kind="show" identifier="toMeasuresList" id="GYQ-XR-u1J"/>
+                                    <segue destination="BoX-1X-6RJ" kind="show" identifier="toResults" id="GYQ-XR-u1J"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -76,10 +76,10 @@
             </objects>
             <point key="canvasLocation" x="-242.0289855072464" y="116.51785714285714"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Results Table View Controller-->
         <scene sceneID="hgl-rs-JZR">
             <objects>
-                <tableViewController id="BoX-1X-6RJ" sceneMemberID="viewController">
+                <tableViewController id="BoX-1X-6RJ" customClass="ResultsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Idu-Cm-Sii">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

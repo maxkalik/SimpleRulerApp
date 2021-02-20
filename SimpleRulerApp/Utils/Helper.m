@@ -70,19 +70,26 @@
 
 #pragma mark - Convert Measurement Into Text Node
 
-- (void)convertMeasurementInTextNode:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index {
+- (void)convertUnitsInTextNodes:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index {
     for (SCNNode *node in textNodes) {
-        if ([node isKindOfClass: [MeasurementNode class]]) {
-            MeasurementNode *textNode = (MeasurementNode*)node;
-            switch (index) {
-                case 1: {
-                    [textNode showInches];
-                    break;
-                };
-                default: {
-                    [textNode showCentimeters];
-                    break;
-                };
+        if ([node isKindOfClass:[MeasureNode class]]) {
+            MeasureNode *measureNode = (MeasureNode*)node;
+            NSLog(@"%@", measureNode);
+            
+            for (SCNNode *measureChildNode in measureNode.childNodes) {
+                if ([measureChildNode isKindOfClass: [UnitNode class]]) {
+                    UnitNode *textNode = (UnitNode*)measureChildNode;
+                    switch (index) {
+                        case 1: {
+                            [textNode showInches];
+                            break;
+                        };
+                        default: {
+                            [textNode showCentimeters];
+                            break;
+                        };
+                    }
+                }
             }
         }
     }

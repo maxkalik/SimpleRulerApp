@@ -10,8 +10,10 @@
 @interface HomeViewController () <ARSCNViewDelegate>
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
-@property(nonatomic, strong) NSMutableArray<SCNNode*> *measureNodes;
+@property(nonatomic, strong) NSMutableArray<MeasureNode*> *measureNodes;
+@property (nonatomic, strong) NSMutableArray *results;
 @property(nonatomic, assign) NSInteger markerCount;
+
 
 @end
 
@@ -49,8 +51,7 @@
 #pragma mark - METHODS
 
 - (void)initiateMeasureNodeWithMarkerNode:(MarkerNode*)markerNode {
-    SCNNode *measureNode = [[SCNNode alloc] init];
-    [measureNode addChildNode:markerNode];
+    MeasureNode *measureNode = [[MeasureNode alloc] initWithMakerNode:markerNode];
     [self.measureNodes addObject:measureNode];
     [self.sceneView.scene.rootNode addChildNode:measureNode];
 }
@@ -77,6 +78,7 @@
     
     NodePositions nodePositions = [Helper.sharedInstance calculateDistanceFrom:start.position to:end.position];
     
+    // [self.results addObject:<#(nonnull id)#>];
     [self addTextForNodePositions:nodePositions];
     [self addLineForNodePositions:nodePositions];
 }
@@ -88,14 +90,21 @@
 }
 
 - (void)addTextForNodePositions:(NodePositions)nodePositions {
-    MeasurementNode *textNode = [[MeasurementNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
+    UnitNode *textNode = [[UnitNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
     [[self.measureNodes lastObject] addChildNode:textNode];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"toResults"]) {
+        ResultsTableViewController *resultsVC = (ResultsTableViewController *)segue.destinationViewController;
+        resultsVC.results = self.results;
+    }
 }
 
 #pragma mark - IBActions
 
 - (IBAction)segmentControlChanged:(UISegmentedControl *)sender {
-    [Helper.sharedInstance convertMeasurementInTextNode:self.sceneView.scene.rootNode.childNodes
+    [Helper.sharedInstance convertUnitsInTextNodes:self.sceneView.scene.rootNode.childNodes
                              toSelectedMeasurementIndex:sender.selectedSegmentIndex];
 }
 
@@ -106,6 +115,5 @@
         [self.measureNodes removeLastObject];
     }
 }
-
 
 @end

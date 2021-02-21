@@ -10,6 +10,7 @@
 @interface HomeViewController () <ARSCNViewDelegate>
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
+@property (weak, nonatomic) IBOutlet CircleButton *resultsButton;
 @property(nonatomic, strong) NSMutableArray<MeasureNode*> *measureNodes;
 @property (nonatomic, strong) NSMutableArray<Result*> *results;
 @property(nonatomic, assign) NSInteger markerCount;
@@ -26,6 +27,7 @@
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
     self.measureNodes = [[NSMutableArray alloc] init];
     self.results = [[NSMutableArray alloc] init];
+    self.resultsButton.enabled = NO;
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
@@ -81,6 +83,7 @@
     
     Result *result = [[Result alloc] initWithDistance:nodePositions.distance];
     [self.results addObject:result];
+    [self updateButton];
     
     [self addTextForNodePositions:nodePositions];
     [self addLineForNodePositions:nodePositions];
@@ -97,9 +100,13 @@
     [[self.measureNodes lastObject] addChildNode:textNode];
 }
 
+- (void)updateButton {
+    self.resultsButton.enabled = self.results.count > 0;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toResults"]) {
-        ResultsTableViewController *resultsVC = (ResultsTableViewController *)segue.destinationViewController;
+        ResultsViewController *resultsVC = (ResultsViewController *)segue.destinationViewController;
         resultsVC.results = self.results;
     }
 }
@@ -115,7 +122,9 @@
     if (self.measureNodes.count > 0) {
         SCNNode *node = [self.measureNodes lastObject];
         [node removeFromParentNode];
+        [self.results removeLastObject];
         [self.measureNodes removeLastObject];
+        [self updateButton];
     }
 }
 

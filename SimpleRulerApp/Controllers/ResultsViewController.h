@@ -1,16 +1,17 @@
 //
-//  ResultsTableViewController.h
+//  ResultsViewController.h
 //  SimpleRulerApp
 //
 //  Created by Maksim Kalik on 2/20/21.
 //
 
 #import <UIKit/UIKit.h>
+#import "ResultsTableViewDataSource.h"
 #import "Result.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ResultsTableViewController : UITableViewController
+@interface ResultsViewController : UIViewController
 
 @property (nonatomic, strong) NSMutableArray<Result*>* results;
 

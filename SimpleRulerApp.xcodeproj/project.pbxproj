@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1127460725E089C00084D479 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127460625E089C00084D479 /* CircleButton.m */; };
-		1127460E25E0A17C0084D479 /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127460D25E0A17C0084D479 /* ResultsTableViewController.m */; };
 		1127461225E138470084D479 /* MeasureNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127461125E138470084D479 /* MeasureNode.m */; };
 		1127461825E1477C0084D479 /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127461725E1477C0084D479 /* Result.m */; };
+		1156E15425E1B6280065362D /* ResultsTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */; };
+		1156E15825E1B8B70065362D /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15725E1B8B70065362D /* ResultsViewController.m */; };
+		1156E15D25E1B9F70065362D /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15C25E1B9F70065362D /* ResultTableViewCell.m */; };
 		116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF425C379E9007D5B0A /* AppDelegate.m */; };
 		116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF925C379E9007D5B0A /* HomeViewController.m */; };
 		116B2EFD25C379E9007D5B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFB25C379E9007D5B0A /* Main.storyboard */; };
@@ -26,12 +28,16 @@
 /* Begin PBXFileReference section */
 		1127460525E089C00084D479 /* CircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleButton.h; sourceTree = "<group>"; };
 		1127460625E089C00084D479 /* CircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleButton.m; sourceTree = "<group>"; };
-		1127460C25E0A17C0084D479 /* ResultsTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewController.h; sourceTree = "<group>"; };
-		1127460D25E0A17C0084D479 /* ResultsTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
 		1127461025E138470084D479 /* MeasureNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeasureNode.h; sourceTree = "<group>"; };
 		1127461125E138470084D479 /* MeasureNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasureNode.m; sourceTree = "<group>"; };
 		1127461625E1477C0084D479 /* Result.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Result.h; sourceTree = "<group>"; };
 		1127461725E1477C0084D479 /* Result.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Result.m; sourceTree = "<group>"; };
+		1156E15225E1B6280065362D /* ResultsTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewDataSource.h; sourceTree = "<group>"; };
+		1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewDataSource.m; sourceTree = "<group>"; };
+		1156E15625E1B8B70065362D /* ResultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
+		1156E15725E1B8B70065362D /* ResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		1156E15B25E1B9F70065362D /* ResultTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
+		1156E15C25E1B9F70065362D /* ResultTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewCell.m; sourceTree = "<group>"; };
 		116B2EF025C379E9007D5B0A /* SimpleRulerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRulerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		116B2EF325C379E9007D5B0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		116B2EF425C379E9007D5B0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -135,8 +141,10 @@
 			children = (
 				116B2EF825C379E9007D5B0A /* HomeViewController.h */,
 				116B2EF925C379E9007D5B0A /* HomeViewController.m */,
-				1127460C25E0A17C0084D479 /* ResultsTableViewController.h */,
-				1127460D25E0A17C0084D479 /* ResultsTableViewController.m */,
+				1156E15625E1B8B70065362D /* ResultsViewController.h */,
+				1156E15725E1B8B70065362D /* ResultsViewController.m */,
+				1156E15225E1B6280065362D /* ResultsTableViewDataSource.h */,
+				1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -154,6 +162,8 @@
 				1127460625E089C00084D479 /* CircleButton.m */,
 				1127461025E138470084D479 /* MeasureNode.h */,
 				1127461125E138470084D479 /* MeasureNode.m */,
+				1156E15B25E1B9F70065362D /* ResultTableViewCell.h */,
+				1156E15C25E1B9F70065362D /* ResultTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -238,15 +248,17 @@
 			files = (
 				116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */,
 				116B2F0525C379E9007D5B0A /* main.m in Sources */,
-				1127460E25E0A17C0084D479 /* ResultsTableViewController.m in Sources */,
 				11FA213325C8AD07000BA053 /* UnitNode.m in Sources */,
 				1127461225E138470084D479 /* MeasureNode.m in Sources */,
 				116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */,
+				1156E15D25E1B9F70065362D /* ResultTableViewCell.m in Sources */,
 				1127461825E1477C0084D479 /* Result.m in Sources */,
 				11FA214825C9729E000BA053 /* MarkerNode.m in Sources */,
 				11FA213A25C8B33B000BA053 /* Helper.m in Sources */,
 				11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */,
 				1127460725E089C00084D479 /* CircleButton.m in Sources */,
+				1156E15425E1B6280065362D /* ResultsTableViewDataSource.m in Sources */,
+				1156E15825E1B8B70065362D /* ResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

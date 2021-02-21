@@ -12,10 +12,11 @@
 #import "UnitNode.h"
 #import "CylinderLineNode.h"
 #import "MarkerNode.h"
-#import "ResultsTableViewController.h"
+#import "ResultsViewController.h"
 #import "Helper.h"
 #import "Result.h"
 #import "MeasureNode.h"
+#import "KVCMutableArrayProxy.h"
 
 @interface HomeViewController : UIViewController
 

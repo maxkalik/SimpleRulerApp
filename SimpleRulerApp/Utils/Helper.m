@@ -91,4 +91,18 @@
     }
 }
 
+
+- (Result*)sumOfResults:(NSArray<Result*>*)results {
+    NSNumber* inches = [results valueForKeyPath:@"@sum.inches"];
+    NSNumber* centimeters = [results valueForKeyPath:@"@sum.centimeters"];
+    Result *result = [[Result alloc] initWithInches:inches.doubleValue andCentimeters:centimeters.doubleValue];
+    return result;
+}
+
+#pragma mark - Result String Format
+
+- (NSString*)convertToStringResultMeasurement:(double)measurement {
+    return [NSString stringWithFormat:@"%.2f cm", measurement];
+}
+
 @end

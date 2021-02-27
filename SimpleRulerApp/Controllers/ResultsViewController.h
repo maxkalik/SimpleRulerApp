@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "ResultsTableViewDataSource.h"
 #import "Result.h"
+#import "Helper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

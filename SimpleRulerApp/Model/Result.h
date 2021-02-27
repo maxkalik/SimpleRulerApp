@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) float inches;
 
 - (instancetype)initWithDistance:(float)distance;
+- (instancetype)initWithInches:(double)inches andCentimeters:(double)centimeters;
 
 @end
 

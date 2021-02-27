@@ -16,7 +16,6 @@
 #import "Helper.h"
 #import "Result.h"
 #import "MeasureNode.h"
-#import "KVCMutableArrayProxy.h"
 
 @interface HomeViewController : UIViewController
 

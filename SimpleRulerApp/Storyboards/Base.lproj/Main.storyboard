@@ -192,6 +192,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="sX5-4F-Nu9"/>
                     <connections>
+                        <outlet property="overallCentimetersLabel" destination="aqb-A4-6V1" id="zPV-uZ-OgR"/>
+                        <outlet property="overallInchesLabel" destination="Vrj-qw-aQF" id="oOq-di-vng"/>
                         <outlet property="resultsTableView" destination="QVZ-dE-UaM" id="eby-Gp-N0d"/>
                     </connections>
                 </viewController>

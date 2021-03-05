@@ -36,6 +36,7 @@ typedef struct NodePositions {
 
 /* Convert Measurement Into Text Node */
 
+- (void)convertUnitInUnitNode:(UnitNode*)unitNode toSelectedMeasurementIndex:(NSInteger)index;
 - (void)convertUnitsInMeasureNodes:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index;
 
 /* Sum of results */

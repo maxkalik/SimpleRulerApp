@@ -79,6 +79,10 @@
 - (void)convertUnitsInMeasureNode:(MeasureNode*)measureNode toSelectedMeasurementIndex:(NSInteger)index {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self isKindOfClass: %@", [UnitNode class]];
     UnitNode *unitNode = (UnitNode *)[measureNode.childNodes filteredArrayUsingPredicate:predicate].firstObject;
+    [self convertUnitInUnitNode:unitNode toSelectedMeasurementIndex:index];
+}
+
+- (void)convertUnitInUnitNode:(UnitNode*)unitNode toSelectedMeasurementIndex:(NSInteger)index {
     switch (index) {
         case 1: {
             [unitNode showInches];
@@ -90,7 +94,6 @@
         };
     }
 }
-
 
 - (Result*)sumOfResults:(NSArray<Result*>*)results {
     NSNumber* inches = [results valueForKeyPath:@"@sum.inches"];

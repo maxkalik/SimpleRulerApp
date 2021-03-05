@@ -11,14 +11,16 @@
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
 @property (weak, nonatomic) IBOutlet CircleButton *resultsButton;
-@property(nonatomic, strong) NSMutableArray<MeasureNode*> *measureNodes;
-@property (nonatomic, strong) NSMutableArray<Result*> *results;
-@property(nonatomic, assign) NSInteger markerCount;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *unitSegmentControl;
 
+@property (nonatomic, strong) NSMutableArray<MeasureNode*> *measureNodes;
+@property (nonatomic, strong) NSMutableArray<Result*> *results;
+@property (nonatomic, assign) NSInteger markerCount;
 
 @end
 
 @implementation HomeViewController
+@synthesize results = _results;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,12 +28,9 @@
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
     self.measureNodes = [[NSMutableArray alloc] init];
-    self.results = [[NSMutableArray alloc] init];
-    self.resultsButton.enabled = NO;
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
-    
     self.markerCount = 0;
 }
 
@@ -96,8 +95,9 @@
 }
 
 - (void)addTextForNodePositions:(NodePositions)nodePositions {
-    UnitNode *textNode = [[UnitNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
-    [[self.measureNodes lastObject] addChildNode:textNode];
+    UnitNode *unitNode = [[UnitNode alloc] initWithDistance:nodePositions.distance and:nodePositions.midpoint];
+    [Helper.sharedInstance convertUnitInUnitNode:unitNode toSelectedMeasurementIndex:self.unitSegmentControl.selectedSegmentIndex];
+    [[self.measureNodes lastObject] addChildNode:unitNode];
 }
 
 - (void)updateButton {

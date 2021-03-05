@@ -122,6 +122,7 @@
     if (self.measureNodes.count > 0) {
         SCNNode *node = [self.measureNodes lastObject];
         [node removeFromParentNode];
+        self.markerCount = 0;
         [self.results removeLastObject];
         [self.measureNodes removeLastObject];
         [self updateButton];

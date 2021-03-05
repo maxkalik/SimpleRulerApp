@@ -19,6 +19,7 @@
 		116B2EFF25C379E9007D5B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFE25C379E9007D5B0A /* Assets.xcassets */; };
 		116B2F0225C379E9007D5B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2F0025C379E9007D5B0A /* LaunchScreen.storyboard */; };
 		116B2F0525C379E9007D5B0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2F0425C379E9007D5B0A /* main.m */; };
+		11E968B125F2EEA60069003E /* NSArray+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E968B025F2EEA60069003E /* NSArray+Helper.m */; };
 		11FA213325C8AD07000BA053 /* UnitNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213225C8AD07000BA053 /* UnitNode.m */; };
 		11FA213A25C8B33B000BA053 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213925C8B33B000BA053 /* Helper.m */; };
 		11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213E25C96D78000BA053 /* CylinderLineNode.m */; };
@@ -48,6 +49,8 @@
 		116B2F0125C379E9007D5B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		116B2F0325C379E9007D5B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		116B2F0425C379E9007D5B0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		11E968AF25F2EEA60069003E /* NSArray+Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helper.h"; sourceTree = "<group>"; };
+		11E968B025F2EEA60069003E /* NSArray+Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Helper.m"; sourceTree = "<group>"; };
 		11FA213125C8AD07000BA053 /* UnitNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitNode.h; sourceTree = "<group>"; };
 		11FA213225C8AD07000BA053 /* UnitNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitNode.m; sourceTree = "<group>"; };
 		11FA213825C8B33B000BA053 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
@@ -97,6 +100,7 @@
 		116B2EF225C379E9007D5B0A /* SimpleRulerApp */ = {
 			isa = PBXGroup;
 			children = (
+				11E968A925F2EE130069003E /* Categories */,
 				1127461525E1474C0084D479 /* Model */,
 				11FA213725C8B30F000BA053 /* Utils */,
 				11FA213025C8ACB4000BA053 /* Views */,
@@ -147,6 +151,15 @@
 				1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		11E968A925F2EE130069003E /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				11E968AF25F2EEA60069003E /* NSArray+Helper.h */,
+				11E968B025F2EEA60069003E /* NSArray+Helper.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		11FA213025C8ACB4000BA053 /* Views */ = {
@@ -259,6 +272,7 @@
 				1127460725E089C00084D479 /* CircleButton.m in Sources */,
 				1156E15425E1B6280065362D /* ResultsTableViewDataSource.m in Sources */,
 				1156E15825E1B8B70065362D /* ResultsViewController.m in Sources */,
+				11E968B125F2EEA60069003E /* NSArray+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

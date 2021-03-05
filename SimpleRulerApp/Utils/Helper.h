@@ -11,6 +11,7 @@
 #import "MeasureNode.h"
 #import "UnitNode.h"
 #import "Result.h"
+#import "NSArray+Helper.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,6 +47,10 @@ typedef struct NodePositions {
 /* Result String Format */
 
 - (NSString*)convertToStringResultMeasurement:(double)measurement;
+
+#pragma mark - Prepare Results Array
+
+- (NSArray<Result*>*)getResultsFromMeasureNodes:(NSMutableArray<MeasureNode*>*)nodes;
 
 @end
 

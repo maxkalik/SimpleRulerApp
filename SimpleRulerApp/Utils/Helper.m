@@ -108,4 +108,14 @@
     return [NSString stringWithFormat:@"%.2f cm", measurement];
 }
 
+#pragma mark - Prepare Results Array
+
+- (NSArray<Result*>*)getResultsFromMeasureNodes:(NSMutableArray<MeasureNode*>*)nodes {
+    NSArray<Result*> *results = [nodes map:^id _Nullable(MeasureNode* object) {
+        Result *result = object.result;
+        return result;
+    }];
+    return results;
+}
+
 @end

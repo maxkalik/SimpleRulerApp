@@ -13,7 +13,7 @@
 
 @implementation ResultsTableViewDataSource
 
-- (id)initWithTableView:(UITableView*)tableView andData:(NSMutableArray<Result*>*)data {
+- (id)initWithTableView:(UITableView*)tableView andData:(NSArray<Result*>*)data {
     self = [super init];
     if (self) {
         self.tableView = tableView;

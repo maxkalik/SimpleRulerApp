@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ResultsTableViewDataSource : UITableView
 
 @property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray<Result*> *data;
+@property (strong, nonatomic) NSArray<Result*> *data;
 
-- (id)initWithTableView:(UITableView*)tableView andData:(NSMutableArray<Result*>*)data;
+- (id)initWithTableView:(UITableView*)tableView andData:(NSArray<Result*>*)data;
 
 @end
 

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ResultsViewController : UIViewController
 
-@property (nonatomic, strong) NSMutableArray<Result*>* results;
+@property (nonatomic, strong) NSArray<Result*>* results;
 
 @end
 

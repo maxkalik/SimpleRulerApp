@@ -7,12 +7,6 @@
 
 #import "MeasureNode.h"
 
-// @interface MeasureNode ()
-//
-// @property (nonatomic, strong) MarkerNode* markerNode;
-//
-// @end
-
 @implementation MeasureNode
 
 - (id)initWithMakerNode:(MarkerNode*)markerNode {
@@ -21,6 +15,10 @@
         [self addChildNode:markerNode];
     }
     return self;
+}
+
+- (void)updateResult:(Result *)result {
+    self.result = result;
 }
 
 @end

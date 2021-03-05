@@ -14,20 +14,20 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *unitSegmentControl;
 
 @property (nonatomic, strong) NSMutableArray<MeasureNode*> *measureNodes;
-@property (nonatomic, strong) NSMutableArray<Result*> *results;
 @property (nonatomic, assign) NSInteger markerCount;
 
 @end
 
+
 @implementation HomeViewController
-@synthesize results = _results;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.sceneView.delegate = self;
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
-    self.measureNodes = [[NSMutableArray alloc] init];
+    self.measureNodes = [[NSMutableArray<MeasureNode*> alloc] init];
+    self.resultsButton.enabled = NO;
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
@@ -74,14 +74,12 @@
 }
 
 - (void)calculateDistance {
-    SCNNode *measureNode = [self.measureNodes lastObject];
+    MeasureNode *measureNode = [self.measureNodes lastObject];
     SCNNode *start = [measureNode.childNodes firstObject];
     SCNNode *end = [measureNode.childNodes lastObject];
     
     NodePositions nodePositions = [Helper.sharedInstance calculateDistanceFrom:start.position to:end.position];
-    
-    Result *result = [[Result alloc] initWithDistance:nodePositions.distance];
-    [self.results addObject:result];
+    [measureNode updateResult:[[Result alloc] initWithDistance:nodePositions.distance]];
     [self updateButton];
     
     [self addTextForNodePositions:nodePositions];
@@ -101,13 +99,13 @@
 }
 
 - (void)updateButton {
-    self.resultsButton.enabled = self.results.count > 0;
+    self.resultsButton.enabled = self.measureNodes.count > 0;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toResults"]) {
         ResultsViewController *resultsVC = (ResultsViewController *)segue.destinationViewController;
-        resultsVC.results = self.results;
+        resultsVC.results = [Helper.sharedInstance getResultsFromMeasureNodes:self.measureNodes];
     }
 }
 
@@ -123,7 +121,6 @@
         SCNNode *node = [self.measureNodes lastObject];
         [node removeFromParentNode];
         self.markerCount = 0;
-        [self.results removeLastObject];
         [self.measureNodes removeLastObject];
         [self updateButton];
     }

@@ -70,22 +70,42 @@
 
 #pragma mark - Convert Measurement Into Text Node
 
-- (void)convertMeasurementInTextNode:(NSArray<SCNNode *>*)textNodes toSelectedMeasurementIndex:(NSInteger)index {
-    for (SCNNode *node in textNodes) {
-        if ([node isKindOfClass: [MeasurementNode class]]) {
-            MeasurementNode *textNode = (MeasurementNode*)node;
-            switch (index) {
-                case 1: {
-                    [textNode showInches];
-                    break;
-                };
-                default: {
-                    [textNode showCentimeters];
-                    break;
-                };
-            }
-        }
+- (void)convertUnitsInMeasureNodes:(NSArray<MeasureNode *>*)measureNodes toSelectedMeasurementIndex:(NSInteger)index {
+    for (MeasureNode *measureNode in measureNodes) {
+        [self convertUnitsInMeasureNode:measureNode toSelectedMeasurementIndex:index];
     }
+}
+
+- (void)convertUnitsInMeasureNode:(MeasureNode*)measureNode toSelectedMeasurementIndex:(NSInteger)index {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self isKindOfClass: %@", [UnitNode class]];
+    UnitNode *unitNode = (UnitNode *)[measureNode.childNodes filteredArrayUsingPredicate:predicate].firstObject;
+    [self convertUnitInUnitNode:unitNode toSelectedMeasurementIndex:index];
+}
+
+- (void)convertUnitInUnitNode:(UnitNode*)unitNode toSelectedMeasurementIndex:(NSInteger)index {
+    switch (index) {
+        case 1: {
+            [unitNode showInches];
+            break;
+        };
+        default: {
+            [unitNode showCentimeters];
+            break;
+        };
+    }
+}
+
+- (Result*)sumOfResults:(NSArray<Result*>*)results {
+    NSNumber* inches = [results valueForKeyPath:@"@sum.inches"];
+    NSNumber* centimeters = [results valueForKeyPath:@"@sum.centimeters"];
+    Result *result = [[Result alloc] initWithInches:inches.doubleValue andCentimeters:centimeters.doubleValue];
+    return result;
+}
+
+#pragma mark - Result String Format
+
+- (NSString*)convertToStringResultMeasurement:(double)measurement {
+    return [NSString stringWithFormat:@"%.2f cm", measurement];
 }
 
 @end

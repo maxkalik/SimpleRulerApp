@@ -8,14 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		1127460725E089C00084D479 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127460625E089C00084D479 /* CircleButton.m */; };
+		1127461225E138470084D479 /* MeasureNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127461125E138470084D479 /* MeasureNode.m */; };
+		1127461825E1477C0084D479 /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127461725E1477C0084D479 /* Result.m */; };
+		1156E15425E1B6280065362D /* ResultsTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */; };
+		1156E15825E1B8B70065362D /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15725E1B8B70065362D /* ResultsViewController.m */; };
+		1156E15D25E1B9F70065362D /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15C25E1B9F70065362D /* ResultTableViewCell.m */; };
 		116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF425C379E9007D5B0A /* AppDelegate.m */; };
-		116B2EF725C379E9007D5B0A /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EF625C379E9007D5B0A /* art.scnassets */; };
 		116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF925C379E9007D5B0A /* HomeViewController.m */; };
 		116B2EFD25C379E9007D5B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFB25C379E9007D5B0A /* Main.storyboard */; };
 		116B2EFF25C379E9007D5B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFE25C379E9007D5B0A /* Assets.xcassets */; };
 		116B2F0225C379E9007D5B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2F0025C379E9007D5B0A /* LaunchScreen.storyboard */; };
 		116B2F0525C379E9007D5B0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2F0425C379E9007D5B0A /* main.m */; };
-		11FA213325C8AD07000BA053 /* MeasurementNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213225C8AD07000BA053 /* MeasurementNode.m */; };
+		11FA213325C8AD07000BA053 /* UnitNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213225C8AD07000BA053 /* UnitNode.m */; };
 		11FA213A25C8B33B000BA053 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213925C8B33B000BA053 /* Helper.m */; };
 		11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213E25C96D78000BA053 /* CylinderLineNode.m */; };
 		11FA214825C9729E000BA053 /* MarkerNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA214725C9729E000BA053 /* MarkerNode.m */; };
@@ -24,10 +28,19 @@
 /* Begin PBXFileReference section */
 		1127460525E089C00084D479 /* CircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleButton.h; sourceTree = "<group>"; };
 		1127460625E089C00084D479 /* CircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CircleButton.m; sourceTree = "<group>"; };
+		1127461025E138470084D479 /* MeasureNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeasureNode.h; sourceTree = "<group>"; };
+		1127461125E138470084D479 /* MeasureNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasureNode.m; sourceTree = "<group>"; };
+		1127461625E1477C0084D479 /* Result.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Result.h; sourceTree = "<group>"; };
+		1127461725E1477C0084D479 /* Result.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Result.m; sourceTree = "<group>"; };
+		1156E15225E1B6280065362D /* ResultsTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewDataSource.h; sourceTree = "<group>"; };
+		1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewDataSource.m; sourceTree = "<group>"; };
+		1156E15625E1B8B70065362D /* ResultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
+		1156E15725E1B8B70065362D /* ResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		1156E15B25E1B9F70065362D /* ResultTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
+		1156E15C25E1B9F70065362D /* ResultTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewCell.m; sourceTree = "<group>"; };
 		116B2EF025C379E9007D5B0A /* SimpleRulerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRulerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		116B2EF325C379E9007D5B0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		116B2EF425C379E9007D5B0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		116B2EF625C379E9007D5B0A /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		116B2EF825C379E9007D5B0A /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		116B2EF925C379E9007D5B0A /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		116B2EFC25C379E9007D5B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -35,8 +48,8 @@
 		116B2F0125C379E9007D5B0A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		116B2F0325C379E9007D5B0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		116B2F0425C379E9007D5B0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		11FA213125C8AD07000BA053 /* MeasurementNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeasurementNode.h; sourceTree = "<group>"; };
-		11FA213225C8AD07000BA053 /* MeasurementNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasurementNode.m; sourceTree = "<group>"; };
+		11FA213125C8AD07000BA053 /* UnitNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitNode.h; sourceTree = "<group>"; };
+		11FA213225C8AD07000BA053 /* UnitNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitNode.m; sourceTree = "<group>"; };
 		11FA213825C8B33B000BA053 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		11FA213925C8B33B000BA053 /* Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		11FA213D25C96D78000BA053 /* CylinderLineNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CylinderLineNode.h; sourceTree = "<group>"; };
@@ -56,6 +69,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1127461525E1474C0084D479 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1127461625E1477C0084D479 /* Result.h */,
+				1127461725E1477C0084D479 /* Result.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		116B2EE725C379E9007D5B0A = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +97,7 @@
 		116B2EF225C379E9007D5B0A /* SimpleRulerApp */ = {
 			isa = PBXGroup;
 			children = (
+				1127461525E1474C0084D479 /* Model */,
 				11FA213725C8B30F000BA053 /* Utils */,
 				11FA213025C8ACB4000BA053 /* Views */,
 				116B2F0D25C37A91007D5B0A /* Supporting Files */,
@@ -99,7 +122,6 @@
 		116B2F0F25C37AAB007D5B0A /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				116B2EF625C379E9007D5B0A /* art.scnassets */,
 				116B2EFE25C379E9007D5B0A /* Assets.xcassets */,
 			);
 			path = Assets;
@@ -119,6 +141,10 @@
 			children = (
 				116B2EF825C379E9007D5B0A /* HomeViewController.h */,
 				116B2EF925C379E9007D5B0A /* HomeViewController.m */,
+				1156E15625E1B8B70065362D /* ResultsViewController.h */,
+				1156E15725E1B8B70065362D /* ResultsViewController.m */,
+				1156E15225E1B6280065362D /* ResultsTableViewDataSource.h */,
+				1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -126,14 +152,18 @@
 		11FA213025C8ACB4000BA053 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				11FA213125C8AD07000BA053 /* MeasurementNode.h */,
-				11FA213225C8AD07000BA053 /* MeasurementNode.m */,
+				11FA213125C8AD07000BA053 /* UnitNode.h */,
+				11FA213225C8AD07000BA053 /* UnitNode.m */,
 				11FA213D25C96D78000BA053 /* CylinderLineNode.h */,
 				11FA213E25C96D78000BA053 /* CylinderLineNode.m */,
 				11FA214625C9729E000BA053 /* MarkerNode.h */,
 				11FA214725C9729E000BA053 /* MarkerNode.m */,
 				1127460525E089C00084D479 /* CircleButton.h */,
 				1127460625E089C00084D479 /* CircleButton.m */,
+				1127461025E138470084D479 /* MeasureNode.h */,
+				1127461125E138470084D479 /* MeasureNode.m */,
+				1156E15B25E1B9F70065362D /* ResultTableViewCell.h */,
+				1156E15C25E1B9F70065362D /* ResultTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,7 +233,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				116B2EF725C379E9007D5B0A /* art.scnassets in Resources */,
 				116B2F0225C379E9007D5B0A /* LaunchScreen.storyboard in Resources */,
 				116B2EFF25C379E9007D5B0A /* Assets.xcassets in Resources */,
 				116B2EFD25C379E9007D5B0A /* Main.storyboard in Resources */,
@@ -219,12 +248,17 @@
 			files = (
 				116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */,
 				116B2F0525C379E9007D5B0A /* main.m in Sources */,
-				11FA213325C8AD07000BA053 /* MeasurementNode.m in Sources */,
+				11FA213325C8AD07000BA053 /* UnitNode.m in Sources */,
+				1127461225E138470084D479 /* MeasureNode.m in Sources */,
 				116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */,
+				1156E15D25E1B9F70065362D /* ResultTableViewCell.m in Sources */,
+				1127461825E1477C0084D479 /* Result.m in Sources */,
 				11FA214825C9729E000BA053 /* MarkerNode.m in Sources */,
 				11FA213A25C8B33B000BA053 /* Helper.m in Sources */,
 				11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */,
 				1127460725E089C00084D479 /* CircleButton.m in Sources */,
+				1156E15425E1B6280065362D /* ResultsTableViewDataSource.m in Sources */,
+				1156E15825E1B8B70065362D /* ResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

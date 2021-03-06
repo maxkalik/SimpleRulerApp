@@ -129,7 +129,18 @@
     }
 }
 - (IBAction)snapshotButtonTapped:(UIButton *)sender {
-    NSLog(@"Snapshot button tapped");
+    UIImage *snapshot = [self.sceneView snapshot];
+    NSLog(@"Snapshot button tapped %@", snapshot);
+    UIImageWriteToSavedPhotosAlbum(snapshot, nil, nil, nil);
+    self.sceneView.alpha = 0;
+    [UIView animateWithDuration:1.0 animations:^{
+        self.sceneView.alpha = 1.0;
+    }];
+    SystemSoundID soundID = 1108;
+
+    AudioServicesPlaySystemSoundWithCompletion(soundID, ^{
+        AudioServicesDisposeSystemSoundID(soundID);
+    });
 }
 
 @end

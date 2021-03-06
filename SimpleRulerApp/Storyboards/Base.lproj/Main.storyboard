@@ -216,6 +216,11 @@
             <point key="canvasLocation" x="515.94202898550725" y="116.51785714285714"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="656-ar-QXD">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+    </designables>
     <resources>
         <image name="back" width="28" height="28"/>
         <image name="line" width="20" height="50"/>

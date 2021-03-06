@@ -10,6 +10,7 @@
 		1127460725E089C00084D479 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127460625E089C00084D479 /* CircleButton.m */; };
 		1127461225E138470084D479 /* MeasureNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127461125E138470084D479 /* MeasureNode.m */; };
 		1127461825E1477C0084D479 /* Result.m in Sources */ = {isa = PBXBuildFile; fileRef = 1127461725E1477C0084D479 /* Result.m */; };
+		113E3A2325F3A6A700EE7CB9 /* ImageSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 113E3A2225F3A6A700EE7CB9 /* ImageSaver.m */; };
 		1156E15425E1B6280065362D /* ResultsTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */; };
 		1156E15825E1B8B70065362D /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15725E1B8B70065362D /* ResultsViewController.m */; };
 		1156E15D25E1B9F70065362D /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15C25E1B9F70065362D /* ResultTableViewCell.m */; };
@@ -34,6 +35,8 @@
 		1127461125E138470084D479 /* MeasureNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeasureNode.m; sourceTree = "<group>"; };
 		1127461625E1477C0084D479 /* Result.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Result.h; sourceTree = "<group>"; };
 		1127461725E1477C0084D479 /* Result.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Result.m; sourceTree = "<group>"; };
+		113E3A2125F3A6A700EE7CB9 /* ImageSaver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageSaver.h; sourceTree = "<group>"; };
+		113E3A2225F3A6A700EE7CB9 /* ImageSaver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageSaver.m; sourceTree = "<group>"; };
 		1156E15225E1B6280065362D /* ResultsTableViewDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewDataSource.h; sourceTree = "<group>"; };
 		1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewDataSource.m; sourceTree = "<group>"; };
 		1156E15625E1B8B70065362D /* ResultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
@@ -191,6 +194,8 @@
 			children = (
 				11FA213825C8B33B000BA053 /* Helper.h */,
 				11FA213925C8B33B000BA053 /* Helper.m */,
+				113E3A2125F3A6A700EE7CB9 /* ImageSaver.h */,
+				113E3A2225F3A6A700EE7CB9 /* ImageSaver.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 				11FA214825C9729E000BA053 /* MarkerNode.m in Sources */,
 				11FA213A25C8B33B000BA053 /* Helper.m in Sources */,
 				11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */,
+				113E3A2325F3A6A700EE7CB9 /* ImageSaver.m in Sources */,
 				1127460725E089C00084D479 /* CircleButton.m in Sources */,
 				1156E15425E1B6280065362D /* ResultsTableViewDataSource.m in Sources */,
 				1156E15825E1B8B70065362D /* ResultsViewController.m in Sources */,

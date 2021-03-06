@@ -6,7 +6,7 @@
 //
 
 #import "SnapshotButton.h"
-// IB_DESIGNABLE
+IB_DESIGNABLE
 
 @implementation SnapshotButton
 
@@ -24,7 +24,6 @@
     circleLayer.fillColor = [UIColor.whiteColor CGColor];
     self.showsTouchWhenHighlighted = YES;
     [self.layer addSublayer:circleLayer];
-    NSLog(@"init button with coder");
 }
 
 @end

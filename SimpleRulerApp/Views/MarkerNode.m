@@ -27,12 +27,12 @@
 
 - (void)common {
     if (self.hitResult != nil) {
-        SCNCylinder *cylinder = [SCNCylinder cylinderWithRadius:0.007 height:0.0001];
+        SCNSphere *sphere = [SCNSphere sphereWithRadius:0.007];
         SCNMaterial* material = [[SCNMaterial alloc] init];
         material.diffuse.contents = UIColor.whiteColor;
-        cylinder.materials = [[NSArray alloc] initWithObjects:material, nil];
+        sphere.materials = [[NSArray alloc] initWithObjects:material, nil];
         
-        self.geometry = cylinder;
+        self.geometry = sphere;
         
         simd_float4 location = self.hitResult.worldTransform.columns[3];
         self.position = SCNVector3Make(location.x, location.y, location.z);

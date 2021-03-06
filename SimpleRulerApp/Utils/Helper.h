@@ -52,6 +52,10 @@ typedef struct NodePositions {
 
 - (NSArray<Result*>*)getResultsFromMeasureNodes:(NSMutableArray<MeasureNode*>*)nodes;
 
+#pragma mark - Save snapshot to album
+
+- (void)snapshotFromScene:(ARSCNView *)scene;
+
 @end
 
 NS_ASSUME_NONNULL_END

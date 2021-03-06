@@ -6,6 +6,7 @@
 //
 
 #import "HomeViewController.h"
+#import <Photos/Photos.h>
 
 @interface HomeViewController () <ARSCNViewDelegate>
 
@@ -44,6 +45,31 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        if (!granted) {
+            NSLog(@"not granted");
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"This app is not authorized to use Camera." preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Setting" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSLog(@"taped settings");
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    // [UIApplication.sharedApplication canOpenURL:settingURL];
+                    [UIApplication.sharedApplication openURL:settingURL options:@{} completionHandler:^(BOOL success) {
+                        if (success) {
+                            NSLog(@"Opened url");
+                        }
+                    }];
+                });
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [self presentViewController:alert animated:YES completion:nil];
+            });
+            return;
+        }
+    }];
+    
     ARWorldTrackingConfiguration *configuration = [ARWorldTrackingConfiguration new];
     [self.sceneView.session runWithConfiguration:configuration];
 }
@@ -128,19 +154,50 @@
         [self updateButton];
     }
 }
+
 - (IBAction)snapshotButtonTapped:(UIButton *)sender {
-    UIImage *snapshot = [self.sceneView snapshot];
-    NSLog(@"Snapshot button tapped %@", snapshot);
-    UIImageWriteToSavedPhotosAlbum(snapshot, nil, nil, nil);
+    
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        switch (status) {
+            case PHAuthorizationStatusAuthorized:
+                NSLog(@"Authorized");
+                break;
+            case PHAuthorizationStatusRestricted:
+                NSLog(@"Restricted");
+                break;
+            case PHAuthorizationStatusDenied: {
+                NSLog(@"Denied");
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"This app is not authorized to use Camera." preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Setting" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    NSLog(@"taped settings");
+                    dispatch_async(dispatch_get_main_queue(), ^(void) {
+                        NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                        // [UIApplication.sharedApplication canOpenURL:settingURL];
+                        [UIApplication.sharedApplication openURL:settingURL options:@{} completionHandler:^(BOOL success) {
+                            if (success) {
+                                NSLog(@"Opened url");
+                            }
+                        }];
+                    });
+                }]];
+                [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    [self presentViewController:alert animated:YES completion:nil];
+                });
+                
+                break;
+            }
+            default:
+                break;
+        }
+    }];
+    
+    [Helper.sharedInstance snapshotFromScene:self.sceneView];
     self.sceneView.alpha = 0;
     [UIView animateWithDuration:1.0 animations:^{
         self.sceneView.alpha = 1.0;
     }];
-    SystemSoundID soundID = 1108;
-
-    AudioServicesPlaySystemSoundWithCompletion(soundID, ^{
-        AudioServicesDisposeSystemSoundID(soundID);
-    });
 }
 
 @end

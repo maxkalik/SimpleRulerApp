@@ -29,8 +29,4 @@
     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
 }
 
-- (void) saveImage:(UIImage*)image {
-    NSLog(@"saved");
-}
-
 @end

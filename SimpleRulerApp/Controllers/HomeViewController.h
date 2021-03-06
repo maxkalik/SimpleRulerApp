@@ -16,7 +16,6 @@
 #import "Helper.h"
 #import "Result.h"
 #import "MeasureNode.h"
-#import "ImageSaver.h"
 
 @interface HomeViewController : UIViewController
 

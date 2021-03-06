@@ -10,6 +10,7 @@
 @interface HomeViewController () <ARSCNViewDelegate>
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
+@property (weak, nonatomic) IBOutlet CircleButton *undoButton;
 @property (weak, nonatomic) IBOutlet CircleButton *resultsButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *unitSegmentControl;
 
@@ -27,7 +28,9 @@
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
     self.measureNodes = [[NSMutableArray<MeasureNode*> alloc] init];
+    
     self.resultsButton.enabled = NO;
+    self.undoButton.enabled = NO;
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
@@ -97,7 +100,9 @@
 }
 
 - (void)updateButton {
-    self.resultsButton.enabled = self.measureNodes.count > 0;
+    BOOL isMeasureNodesNotEmpty = self.measureNodes.count > 0;
+    self.undoButton.enabled = isMeasureNodesNotEmpty;
+    self.resultsButton.enabled = isMeasureNodesNotEmpty;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

@@ -83,6 +83,7 @@
                     <connections>
                         <outlet property="resultsButton" destination="Kvu-ph-eP4" id="Ske-qc-Iiz"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
+                        <outlet property="undoButton" destination="fYz-NX-gbI" id="g9Y-Yp-q02"/>
                         <outlet property="unitSegmentControl" destination="Qt1-Tp-WfT" id="Sxl-8H-ws6"/>
                     </connections>
                 </viewController>

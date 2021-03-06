@@ -123,5 +123,8 @@
         [self updateButton];
     }
 }
+- (IBAction)snapshotButtonTapped:(UIButton *)sender {
+    NSLog(@"Snapshot button tapped");
+}
 
 @end

@@ -52,11 +52,23 @@
                                     <segue destination="yQS-Z3-F6B" kind="show" identifier="toResults" id="6HZ-Ux-npK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="656-ar-QXD" customClass="SnapshotButton">
+                                <rect key="frame" x="177" y="762" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1eK-Wr-wi4"/>
+                                    <constraint firstAttribute="width" constant="60" id="8ex-DK-kKd"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="snapshotButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="azk-b0-6hc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="656-ar-QXD" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="BvP-fr-Agn"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Kvu-ph-eP4" secondAttribute="bottom" constant="40" id="CbG-HC-r0i"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="656-ar-QXD" secondAttribute="bottom" constant="40" id="DDh-wP-BVu"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="fYz-NX-gbI" secondAttribute="bottom" constant="40" id="LrY-gL-HO9"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>

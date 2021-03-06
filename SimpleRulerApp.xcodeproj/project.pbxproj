@@ -20,6 +20,7 @@
 		116B2F0225C379E9007D5B0A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2F0025C379E9007D5B0A /* LaunchScreen.storyboard */; };
 		116B2F0525C379E9007D5B0A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2F0425C379E9007D5B0A /* main.m */; };
 		11E968B125F2EEA60069003E /* NSArray+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E968B025F2EEA60069003E /* NSArray+Helper.m */; };
+		11E968B725F397050069003E /* SnapshotButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11E968B625F397050069003E /* SnapshotButton.m */; };
 		11FA213325C8AD07000BA053 /* UnitNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213225C8AD07000BA053 /* UnitNode.m */; };
 		11FA213A25C8B33B000BA053 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213925C8B33B000BA053 /* Helper.m */; };
 		11FA213F25C96D78000BA053 /* CylinderLineNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA213E25C96D78000BA053 /* CylinderLineNode.m */; };
@@ -51,6 +52,8 @@
 		116B2F0425C379E9007D5B0A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11E968AF25F2EEA60069003E /* NSArray+Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helper.h"; sourceTree = "<group>"; };
 		11E968B025F2EEA60069003E /* NSArray+Helper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Helper.m"; sourceTree = "<group>"; };
+		11E968B525F397050069003E /* SnapshotButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SnapshotButton.h; sourceTree = "<group>"; };
+		11E968B625F397050069003E /* SnapshotButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapshotButton.m; sourceTree = "<group>"; };
 		11FA213125C8AD07000BA053 /* UnitNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnitNode.h; sourceTree = "<group>"; };
 		11FA213225C8AD07000BA053 /* UnitNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitNode.m; sourceTree = "<group>"; };
 		11FA213825C8B33B000BA053 /* Helper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				1127461125E138470084D479 /* MeasureNode.m */,
 				1156E15B25E1B9F70065362D /* ResultTableViewCell.h */,
 				1156E15C25E1B9F70065362D /* ResultTableViewCell.m */,
+				11E968B525F397050069003E /* SnapshotButton.h */,
+				11E968B625F397050069003E /* SnapshotButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */,
+				11E968B725F397050069003E /* SnapshotButton.m in Sources */,
 				116B2F0525C379E9007D5B0A /* main.m in Sources */,
 				11FA213325C8AD07000BA053 /* UnitNode.m in Sources */,
 				1127461225E138470084D479 /* MeasureNode.m in Sources */,

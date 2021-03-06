@@ -60,9 +60,7 @@
 
 - (void)addMarkerAt:(ARHitTestResult*)hitResult {
     MarkerNode *markerNode = [[MarkerNode alloc] initWithHitResult:hitResult];
-    
     self.markerCount += 1;
-    
     if (self.markerCount > 1) {
         SCNNode *measureNode = [self.measureNodes lastObject];
         [measureNode addChildNode:markerNode];

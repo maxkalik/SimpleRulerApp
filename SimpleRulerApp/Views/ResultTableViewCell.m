@@ -18,8 +18,8 @@
 @implementation ResultTableViewCell
 
 - (void)configureCellWithResult:(Result*)result {
-    self.centimetersLabel.text = [Helper.sharedInstance convertToStringResultMeasurement:result.centimeters];
-    self.inchesLabel.text = [Helper.sharedInstance convertToStringResultMeasurement:result.inches];
+    self.centimetersLabel.text = [NSString stringWithFormat:@"%@ cm", [Helper.sharedInstance convertToStringResultMeasurement:result.centimeters]];
+    self.inchesLabel.text = [NSString stringWithFormat:@"%@ in", [Helper.sharedInstance convertToStringResultMeasurement:result.inches]];
 }
 
 @end

@@ -30,8 +30,8 @@
     Result *overallResult = [Helper.sharedInstance sumOfResults:self.results];
     NSString* inchesStr = [Helper.sharedInstance convertToStringResultMeasurement:overallResult.inches];
     NSString* centimetersStr = [Helper.sharedInstance convertToStringResultMeasurement:overallResult.centimeters];
-    self.overallInchesLabel.text = inchesStr;
-    self.overallCentimetersLabel.text = centimetersStr;
+    self.overallInchesLabel.text = [NSString stringWithFormat:@"%@ in", inchesStr];
+    self.overallCentimetersLabel.text = [NSString stringWithFormat:@"%@ cm", centimetersStr];
 }
 
 @end

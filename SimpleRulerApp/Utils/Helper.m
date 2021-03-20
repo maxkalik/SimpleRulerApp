@@ -105,7 +105,7 @@
 #pragma mark - Result String Format
 
 - (NSString*)convertToStringResultMeasurement:(double)measurement {
-    return [NSString stringWithFormat:@"%.2f cm", measurement];
+    return [NSString stringWithFormat:@"%.2f", measurement];
 }
 
 #pragma mark - Prepare Results Array

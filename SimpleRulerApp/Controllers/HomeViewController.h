@@ -16,6 +16,8 @@
 #import "Helper.h"
 #import "Result.h"
 #import "MeasureNode.h"
+#import "UIViewController+Alert.h"
+#import "SnapshotButton.h"
 
 @interface HomeViewController : UIViewController
 

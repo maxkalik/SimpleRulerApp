@@ -52,11 +52,23 @@
                                     <segue destination="yQS-Z3-F6B" kind="show" identifier="toResults" id="6HZ-Ux-npK"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="656-ar-QXD" customClass="SnapshotButton">
+                                <rect key="frame" x="177" y="762" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="1eK-Wr-wi4"/>
+                                    <constraint firstAttribute="width" constant="60" id="8ex-DK-kKd"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="snapshotButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="azk-b0-6hc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="656-ar-QXD" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="BvP-fr-Agn"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Kvu-ph-eP4" secondAttribute="bottom" constant="40" id="CbG-HC-r0i"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="656-ar-QXD" secondAttribute="bottom" constant="40" id="DDh-wP-BVu"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="GsS-dJ-CKf"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="fYz-NX-gbI" secondAttribute="bottom" constant="40" id="LrY-gL-HO9"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="XyZ-9z-H8e"/>
@@ -69,9 +81,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="resultsButton" destination="Kvu-ph-eP4" id="Ske-qc-Iiz"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <outlet property="unitSegmentControl" destination="Qt1-Tp-WfT" id="Sxl-8H-ws6"/>
+                        <outletCollection property="buttons" destination="fYz-NX-gbI" id="yKc-1g-8V0"/>
+                        <outletCollection property="buttons" destination="Kvu-ph-eP4" id="RH0-Fy-uZd"/>
+                        <outletCollection property="buttons" destination="656-ar-QXD" id="a5D-30-REW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -144,24 +158,18 @@
                                 <rect key="frame" x="0.0" y="730" width="414" height="112"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="7kk-ka-jpc">
-                                        <rect key="frame" x="40" y="30" width="334" height="30"/>
+                                        <rect key="frame" x="55" y="30" width="319" height="30"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overall" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mmb-gn-upE">
-                                                <rect key="frame" x="0.0" y="2.5" width="98" height="25.5"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrj-qw-aQF">
-                                                <rect key="frame" x="118" y="2.5" width="98" height="25.5"/>
+                                                <rect key="frame" x="0.0" y="2.5" width="149.5" height="25.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" systemColor="systemOrangeColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 cm" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqb-A4-6V1">
-                                                <rect key="frame" x="236" y="2.5" width="98" height="25.5"/>
+                                                <rect key="frame" x="169.5" y="2.5" width="149.5" height="25.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" systemColor="systemOrangeColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -173,7 +181,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="7kk-ka-jpc" secondAttribute="trailing" constant="40" id="CfT-Yt-JHW"/>
-                                    <constraint firstItem="7kk-ka-jpc" firstAttribute="leading" secondItem="5T4-ve-lcO" secondAttribute="leading" constant="40" id="Pog-kN-Fvv"/>
+                                    <constraint firstItem="7kk-ka-jpc" firstAttribute="leading" secondItem="5T4-ve-lcO" secondAttribute="leading" constant="55" id="Pog-kN-Fvv"/>
                                     <constraint firstItem="7kk-ka-jpc" firstAttribute="top" secondItem="5T4-ve-lcO" secondAttribute="top" constant="30" id="Xh3-Wh-tVR"/>
                                     <constraint firstAttribute="height" constant="112" id="nVp-jh-7J8"/>
                                 </constraints>
@@ -209,6 +217,9 @@
         <image name="list" width="28" height="28"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

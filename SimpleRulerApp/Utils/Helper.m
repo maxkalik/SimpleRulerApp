@@ -118,4 +118,16 @@
     return results;
 }
 
+#pragma mark - Save snapshot to album
+
+- (void)snapshotFromScene:(ARSCNView *)scene {
+    UIImage *snapshot = [scene snapshot];
+    UIImageWriteToSavedPhotosAlbum(snapshot, nil, nil, nil);
+    SystemSoundID soundID = 1108;
+
+    AudioServicesPlaySystemSoundWithCompletion(soundID, ^{
+        AudioServicesDisposeSystemSoundID(soundID);
+    });
+}
+
 @end

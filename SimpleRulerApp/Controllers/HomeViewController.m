@@ -54,13 +54,11 @@
 
 - (void)setupScene {
     self.sceneView.delegate = self;
-    self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
     self.measureNodes = [[NSMutableArray<MeasureNode*> alloc] init];
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
 }
-
 
 - (void)requestAccessToCamera {
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {

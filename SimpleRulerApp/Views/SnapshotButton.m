@@ -15,6 +15,8 @@
 
 @implementation SnapshotButton
 
+@synthesize enabled = _enabled;
+
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
@@ -33,7 +35,7 @@
 
 - (void)setEnabled:(BOOL)enabled {
     self.circleLayer.opacity = enabled ? 0.8 : 0.2;
-    
+    _enabled = enabled;
 }
 
 @end

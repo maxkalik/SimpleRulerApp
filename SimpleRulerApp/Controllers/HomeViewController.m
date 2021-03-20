@@ -56,7 +56,7 @@
     [super viewDidAppear:animated];
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
         if (!granted) {
-            [self showAlertToAuthorizeCamera];
+            [self showAlertToAuthUserSettings];
         } else {
             self.isCameraAuthorized = YES;
         }
@@ -70,7 +70,7 @@
 
 #pragma mark - METHODS
 
-- (void)showAlertToAuthorizeCamera {
+- (void)showAlertToAuthUserSettings {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         [self alertWithTitle:@"Error" message:@"This app is not authorized to use Camera." completion:^(UIAlertAction * _Nonnull action) {
             NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
@@ -88,7 +88,7 @@
 
 - (void)addMarkerAt:(ARHitTestResult*)hitResult {
     if (!self.isCameraAuthorized) {
-        [self showAlertToAuthorizeCamera];
+        [self showAlertToAuthUserSettings];
         return;
     }
     
@@ -143,6 +143,19 @@
     }
 }
 
+- (void)checkLibraryAuthorization {
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        switch (status) {
+            case PHAuthorizationStatusDenied: {
+                [self showAlertToAuthUserSettings];
+                break;
+            }
+            default:
+                break;
+        }
+    }];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)segmentControlChanged:(UISegmentedControl *)sender {
@@ -161,36 +174,7 @@
 }
 
 - (IBAction)snapshotButtonTapped:(UIButton *)sender {
-    
-    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-        switch (status) {
-            case PHAuthorizationStatusAuthorized:
-                NSLog(@"Authorized");
-                break;
-            case PHAuthorizationStatusRestricted:
-                NSLog(@"Restricted");
-                break;
-            case PHAuthorizationStatusDenied: {
-                NSLog(@"Denied");
-                
-                dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    [self alertWithTitle:@"Error" message:@"This app is not authorized to use Camera." completion:^(UIAlertAction * _Nonnull action) {
-                        NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                        [UIApplication.sharedApplication openURL:settingURL options:@{} completionHandler:^(BOOL success) {
-                            if (success) {
-                                NSLog(@"Opened url");
-                            }
-                        }];
-                    }];
-                });
-                
-                break;
-            }
-            default:
-                break;
-        }
-    }];
-    
+    [self checkLibraryAuthorization];
     [Helper.sharedInstance snapshotFromScene:self.sceneView];
     self.sceneView.alpha = 0;
     [UIView animateWithDuration:1.0 animations:^{

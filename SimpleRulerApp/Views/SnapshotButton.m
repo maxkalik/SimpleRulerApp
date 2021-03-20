@@ -6,7 +6,6 @@
 //
 
 #import "SnapshotButton.h"
-IB_DESIGNABLE
 
 @implementation SnapshotButton
 

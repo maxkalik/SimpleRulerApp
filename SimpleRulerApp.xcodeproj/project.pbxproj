@@ -13,6 +13,7 @@
 		1156E15425E1B6280065362D /* ResultsTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15325E1B6280065362D /* ResultsTableViewDataSource.m */; };
 		1156E15825E1B8B70065362D /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15725E1B8B70065362D /* ResultsViewController.m */; };
 		1156E15D25E1B9F70065362D /* ResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1156E15C25E1B9F70065362D /* ResultTableViewCell.m */; };
+		1161220026066F6900A4348C /* UIViewController+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 116121FF26066F6900A4348C /* UIViewController+Alert.m */; };
 		116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF425C379E9007D5B0A /* AppDelegate.m */; };
 		116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 116B2EF925C379E9007D5B0A /* HomeViewController.m */; };
 		116B2EFD25C379E9007D5B0A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 116B2EFB25C379E9007D5B0A /* Main.storyboard */; };
@@ -40,6 +41,8 @@
 		1156E15725E1B8B70065362D /* ResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		1156E15B25E1B9F70065362D /* ResultTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultTableViewCell.h; sourceTree = "<group>"; };
 		1156E15C25E1B9F70065362D /* ResultTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultTableViewCell.m; sourceTree = "<group>"; };
+		116121FE26066F6900A4348C /* UIViewController+Alert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Alert.h"; sourceTree = "<group>"; };
+		116121FF26066F6900A4348C /* UIViewController+Alert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Alert.m"; sourceTree = "<group>"; };
 		116B2EF025C379E9007D5B0A /* SimpleRulerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleRulerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		116B2EF325C379E9007D5B0A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		116B2EF425C379E9007D5B0A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 			children = (
 				11E968AF25F2EEA60069003E /* NSArray+Helper.h */,
 				11E968B025F2EEA60069003E /* NSArray+Helper.m */,
+				116121FE26066F6900A4348C /* UIViewController+Alert.h */,
+				116121FF26066F6900A4348C /* UIViewController+Alert.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -267,6 +272,7 @@
 				116B2EFA25C379E9007D5B0A /* HomeViewController.m in Sources */,
 				11E968B725F397050069003E /* SnapshotButton.m in Sources */,
 				116B2F0525C379E9007D5B0A /* main.m in Sources */,
+				1161220026066F6900A4348C /* UIViewController+Alert.m in Sources */,
 				11FA213325C8AD07000BA053 /* UnitNode.m in Sources */,
 				1127461225E138470084D479 /* MeasureNode.m in Sources */,
 				116B2EF525C379E9007D5B0A /* AppDelegate.m in Sources */,

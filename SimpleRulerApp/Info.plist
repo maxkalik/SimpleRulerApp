@@ -43,6 +43,8 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To save your snapshots with measures allow this app to use your library</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To work this application you need to allow access your camera</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

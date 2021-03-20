@@ -11,12 +11,11 @@
 @interface HomeViewController () <ARSCNViewDelegate>
 
 @property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
-@property (weak, nonatomic) IBOutlet CircleButton *undoButton;
-@property (weak, nonatomic) IBOutlet CircleButton *resultsButton;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *unitSegmentControl;
-
+@property (weak, nonatomic)   IBOutlet UISegmentedControl *unitSegmentControl;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (nonatomic, strong) NSMutableArray<MeasureNode*> *measureNodes;
 @property (nonatomic, assign) NSInteger markerCount;
+@property (nonatomic, assign) BOOL isCameraAuthorized;
 
 @end
 
@@ -29,13 +28,17 @@
     self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
     self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
     self.measureNodes = [[NSMutableArray<MeasureNode*> alloc] init];
-    
-    self.resultsButton.enabled = NO;
-    self.undoButton.enabled = NO;
+
+    for (UIButton *button in self.buttons) {
+        button.enabled = NO;
+    }
     
     UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.sceneView addGestureRecognizer:tapGestureRecognizer];
     self.markerCount = 0;
+    
+    self.isCameraAuthorized = NO;
+    
 }
 
 - (void)handleTap:(UITapGestureRecognizer*)sender {
@@ -45,33 +48,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-        if (!granted) {
-            NSLog(@"not granted");
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"This app is not authorized to use Camera." preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"Setting" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSLog(@"taped settings");
-                dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                    // [UIApplication.sharedApplication canOpenURL:settingURL];
-                    [UIApplication.sharedApplication openURL:settingURL options:@{} completionHandler:^(BOOL success) {
-                        if (success) {
-                            NSLog(@"Opened url");
-                        }
-                    }];
-                });
-            }]];
-            [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                [self presentViewController:alert animated:YES completion:nil];
-            });
-            return;
-        }
-    }];
-    
     ARWorldTrackingConfiguration *configuration = [ARWorldTrackingConfiguration new];
     [self.sceneView.session runWithConfiguration:configuration];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        if (!granted) {
+            [self showAlertToAuthorizeCamera];
+        } else {
+            self.isCameraAuthorized = YES;
+        }
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -81,6 +70,16 @@
 
 #pragma mark - METHODS
 
+- (void)showAlertToAuthorizeCamera {
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        [self alertWithTitle:@"Error" message:@"This app is not authorized to use Camera." completion:^(UIAlertAction * _Nonnull action) {
+            NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [UIApplication.sharedApplication openURL:settingURL options:@{} completionHandler:nil];
+            self.isCameraAuthorized = YES;
+        }];
+    });
+}
+
 - (void)initiateMeasureNodeWithMarkerNode:(MarkerNode*)markerNode {
     MeasureNode *measureNode = [[MeasureNode alloc] initWithMakerNode:markerNode];
     [self.measureNodes addObject:measureNode];
@@ -88,6 +87,11 @@
 }
 
 - (void)addMarkerAt:(ARHitTestResult*)hitResult {
+    if (!self.isCameraAuthorized) {
+        [self showAlertToAuthorizeCamera];
+        return;
+    }
+    
     MarkerNode *markerNode = [[MarkerNode alloc] initWithHitResult:hitResult];
     self.markerCount += 1;
     if (self.markerCount > 1) {
@@ -126,9 +130,10 @@
 }
 
 - (void)updateButton {
-    BOOL isMeasureNodesNotEmpty = self.measureNodes.count > 0;
-    self.undoButton.enabled = isMeasureNodesNotEmpty;
-    self.resultsButton.enabled = isMeasureNodesNotEmpty;
+    BOOL isMeasureNodesNotEmpty = self.measureNodes.count > 0;    
+    for (UIButton *button in self.buttons) {
+        button.enabled = isMeasureNodesNotEmpty;
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -168,22 +173,15 @@
             case PHAuthorizationStatusDenied: {
                 NSLog(@"Denied");
                 
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"This app is not authorized to use Camera." preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"Setting" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    NSLog(@"taped settings");
-                    dispatch_async(dispatch_get_main_queue(), ^(void) {
+                dispatch_async(dispatch_get_main_queue(), ^(void) {
+                    [self alertWithTitle:@"Error" message:@"This app is not authorized to use Camera." completion:^(UIAlertAction * _Nonnull action) {
                         NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                        // [UIApplication.sharedApplication canOpenURL:settingURL];
                         [UIApplication.sharedApplication openURL:settingURL options:@{} completionHandler:^(BOOL success) {
                             if (success) {
                                 NSLog(@"Opened url");
                             }
                         }];
-                    });
-                }]];
-                [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-                dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    [self presentViewController:alert animated:YES completion:nil];
+                    }];
                 });
                 
                 break;

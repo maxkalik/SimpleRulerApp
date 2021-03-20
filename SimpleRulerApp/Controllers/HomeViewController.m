@@ -24,26 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.sceneView.delegate = self;
-    self.sceneView.debugOptions = ARSCNDebugOptionShowFeaturePoints;
-    self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
-    self.measureNodes = [[NSMutableArray<MeasureNode*> alloc] init];
-
-    for (UIButton *button in self.buttons) {
-        button.enabled = NO;
-    }
-    
-    UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [self.sceneView addGestureRecognizer:tapGestureRecognizer];
-    self.markerCount = 0;
-    
-    self.isCameraAuthorized = NO;
-    
-}
-
-- (void)handleTap:(UITapGestureRecognizer*)sender {
-    ARHitTestResult* hitResult = [Helper.sharedInstance getHitResultFromTapGesture:sender inSceneView:self.sceneView];
-    [self addMarkerAt:hitResult];
+    [self setupScene];
+    [self setupCommon];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -54,13 +36,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-        if (!granted) {
-            [self showAlertToAuthorizeCamera];
-        } else {
-            self.isCameraAuthorized = YES;
-        }
-    }];
+    [self requestAccessToCamera];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -70,12 +46,52 @@
 
 #pragma mark - METHODS
 
-- (void)showAlertToAuthorizeCamera {
+- (void)setupCommon {
+    [self enableAllButtonsWithFlag:NO];
+    self.markerCount = 0;
+    self.isCameraAuthorized = NO;
+}
+
+- (void)setupScene {
+    self.sceneView.delegate = self;
+    self.sceneView.pointOfView.camera.usesOrthographicProjection = YES;
+    self.measureNodes = [[NSMutableArray<MeasureNode*> alloc] init];
+    UIGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self.sceneView addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)requestAccessToCamera {
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        if (!granted) {
+            [self showAlertToAuthUserSettings];
+        } else {
+            self.isCameraAuthorized = YES;
+        }
+    }];
+}
+
+- (void)enableAllButtonsWithFlag:(BOOL)flag {
+    for (UIButton *button in self.buttons) {
+        button.enabled = flag;
+    }
+}
+
+- (void)handleTap:(UITapGestureRecognizer*)sender {
+    if (!self.isCameraAuthorized) {
+        [self showAlertToAuthUserSettings];
+        return;
+    }
+    ARHitTestResult* hitResult = [Helper.sharedInstance getHitResultFromTapGesture:sender inSceneView:self.sceneView];
+    [self addMarkerAt:hitResult];
+}
+
+- (void)showAlertToAuthUserSettings {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
-        [self alertWithTitle:@"Error" message:@"This app is not authorized to use Camera." completion:^(UIAlertAction * _Nonnull action) {
+        [self alertWithTitle:@"Camera is not authorized"
+                     message:@"To see the objects, to make snapshots the app needs permition to use the camera."
+                  completion:^(UIAlertAction * _Nonnull action) {
             NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
             [UIApplication.sharedApplication openURL:settingURL options:@{} completionHandler:nil];
-            self.isCameraAuthorized = YES;
         }];
     });
 }
@@ -87,11 +103,6 @@
 }
 
 - (void)addMarkerAt:(ARHitTestResult*)hitResult {
-    if (!self.isCameraAuthorized) {
-        [self showAlertToAuthorizeCamera];
-        return;
-    }
-    
     MarkerNode *markerNode = [[MarkerNode alloc] initWithHitResult:hitResult];
     self.markerCount += 1;
     if (self.markerCount > 1) {
@@ -131,9 +142,7 @@
 
 - (void)updateButton {
     BOOL isMeasureNodesNotEmpty = self.measureNodes.count > 0;    
-    for (UIButton *button in self.buttons) {
-        button.enabled = isMeasureNodesNotEmpty;
-    }
+    [self enableAllButtonsWithFlag:isMeasureNodesNotEmpty];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -141,6 +150,19 @@
         ResultsViewController *resultsVC = (ResultsViewController *)segue.destinationViewController;
         resultsVC.results = [Helper.sharedInstance getResultsFromMeasureNodes:self.measureNodes];
     }
+}
+
+- (void)checkLibraryAuthorization {
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        switch (status) {
+            case PHAuthorizationStatusDenied: {
+                [self showAlertToAuthUserSettings];
+                break;
+            }
+            default:
+                break;
+        }
+    }];
 }
 
 #pragma mark - IBActions
@@ -161,36 +183,7 @@
 }
 
 - (IBAction)snapshotButtonTapped:(UIButton *)sender {
-    
-    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-        switch (status) {
-            case PHAuthorizationStatusAuthorized:
-                NSLog(@"Authorized");
-                break;
-            case PHAuthorizationStatusRestricted:
-                NSLog(@"Restricted");
-                break;
-            case PHAuthorizationStatusDenied: {
-                NSLog(@"Denied");
-                
-                dispatch_async(dispatch_get_main_queue(), ^(void) {
-                    [self alertWithTitle:@"Error" message:@"This app is not authorized to use Camera." completion:^(UIAlertAction * _Nonnull action) {
-                        NSURL *settingURL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                        [UIApplication.sharedApplication openURL:settingURL options:@{} completionHandler:^(BOOL success) {
-                            if (success) {
-                                NSLog(@"Opened url");
-                            }
-                        }];
-                    }];
-                });
-                
-                break;
-            }
-            default:
-                break;
-        }
-    }];
-    
+    [self checkLibraryAuthorization];
     [Helper.sharedInstance snapshotFromScene:self.sceneView];
     self.sceneView.alpha = 0;
     [UIView animateWithDuration:1.0 animations:^{

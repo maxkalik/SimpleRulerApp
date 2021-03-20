@@ -7,7 +7,15 @@
 
 #import "SnapshotButton.h"
 
+@interface SnapshotButton ()
+
+@property (nonatomic, strong)CAShapeLayer *circleLayer;
+
+@end
+
 @implementation SnapshotButton
+
+@synthesize enabled = _enabled;
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
@@ -18,11 +26,16 @@
 }
 
 - (void)common {
-    CAShapeLayer *circleLayer = [CAShapeLayer layer];
-    [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 60, 60)] CGPath]];
-    circleLayer.fillColor = [UIColor.whiteColor CGColor];
+    self.circleLayer = [[CAShapeLayer alloc] init];
+    [self.circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 60, 60)] CGPath]];
+    self.circleLayer.fillColor = [UIColor.whiteColor CGColor];
     self.showsTouchWhenHighlighted = YES;
-    [self.layer addSublayer:circleLayer];
+    [self.layer addSublayer:self.circleLayer];
+}
+
+- (void)setEnabled:(BOOL)enabled {
+    self.circleLayer.opacity = enabled ? 0.8 : 0.2;
+    _enabled = enabled;
 }
 
 @end

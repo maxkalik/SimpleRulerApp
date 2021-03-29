@@ -4,7 +4,7 @@
 
 # MySimpleRuler
 
-<a href=""><img style="height: 54px; width: auto; padding: 10px" height="54px" src="https://www.worddeposit.com/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk.svg" alt="Download MySimpleRuler from App Store"></a>
+<a href="https://apps.apple.com/app/mysimpleruler/id1559398756"><img style="height: 54px; width: auto; padding: 10px" height="54px" src="https://www.worddeposit.com/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk.svg" alt="Download MySimpleRuler from App Store"></a>
 
 This application is a simple way to measure the objects which locating around you.
 

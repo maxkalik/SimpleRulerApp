@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.com/maxkalik/SimpleRulerApp.svg?branch=master)](https://travis-ci.com/maxkalik/SimpleRulerApp)
-<hr />
+---
+<br />
 
 ![MySimpleRuler](app-icon.png)
 

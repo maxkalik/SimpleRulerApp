@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.com/maxkalik/SimpleRulerApp.svg?branch=master)](https://travis-ci.com/maxkalik/SimpleRulerApp)
 
 ![MySimpleRuler](app-icon.png)
 
